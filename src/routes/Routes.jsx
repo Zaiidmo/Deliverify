@@ -11,6 +11,7 @@ import OTPLogin from "../pages/Auth/LoginOTP.jsx";
 import Layout from "../pages/Layout.jsx";
 import { EmailVerification } from "../components/Auth/EmailVerification.jsx";
 import { PrivateRoute, PublicRoute } from "../components/RouteGuards.jsx";
+import UserProfile from "../pages/Delivery/UserProfile.jsx";
 
 const AppRoutes = () => {
   return (
@@ -29,6 +30,7 @@ const AppRoutes = () => {
                 <Route path="forgot-password" element={<ForgotPassword />} />
                 <Route path="reset-password" element={<ResetPasswordForm />} />
                 <Route path="otp-login" element={<OTPLogin />} />
+                <Route path="profile" element={<UserProfile />} />
               </Routes>
             </PublicRoute>
           }
