@@ -29,7 +29,7 @@ export const StatisticsTable = ({head, data}) => {
                 </div>
                 <div>
                   <div className="font-bold">{item.name}</div>
-                  <div className="text-xs opacity-50">{item.created}</div>
+                  <div className="text-xs opacity-50">{item.creation}</div>
                 </div>
               </div>
             </td>
