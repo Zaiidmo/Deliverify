@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { verifyOTP } from "../services/AuthService";
+import { verifyOTP } from "../../services/AuthService";
 // import { toast, ToastContainer } from "react-toastify";
 import toast, { Toaster } from "react-hot-toast";
 import { GridLoader } from "react-spinners";

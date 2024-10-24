@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { resetPassword } from "../services/AuthService";
+import { resetPassword } from "../../services/AuthService";
 import { KeyRound, Eye, EyeOff } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 import { GridLoader } from "react-spinners";

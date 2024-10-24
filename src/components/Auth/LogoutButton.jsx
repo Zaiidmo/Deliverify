@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Logout } from "../services/AuthService";
+import { Logout } from "../../services/AuthService";
 import toast, { Toaster } from "react-hot-toast";
 
 const LogoutButton = () => {

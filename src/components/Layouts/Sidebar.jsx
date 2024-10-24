@@ -1,10 +1,10 @@
 import { DoorOpen, Home, LogIn, LogOut } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { isAuthenticated } from "./RouteGuards";
+import { isAuthenticated } from "../RouteGuards";
 import { Link } from "react-router-dom";
 import { Bell, User } from "lucide-react";
 import { SidebarButton } from "./SidebarButton";
-import LogoutButton from "./LogoutButton";
+import LogoutButton from "../Auth/LogoutButton";
 const Sidebar = () => {
   const [isAuth, setIsAuth] = useState(isAuthenticated());
 

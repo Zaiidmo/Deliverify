@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { loginClient } from "../services/AuthService";
+import { loginClient } from "../../services/AuthService";
 import {
   validateField,
   validateForm,
   hasFormErrors,
-} from "../helper/AuthFormValidator";
+} from "../../helper/AuthFormValidator";
 import { User, KeyRound, Eye, EyeOff } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 import { GridLoader } from "react-spinners";

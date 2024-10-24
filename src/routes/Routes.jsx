@@ -6,10 +6,10 @@ import Register from "../pages/Auth/Register.jsx";
 import Login from "../pages/Auth/Login.jsx";
 import ForgotPassword from "../pages/Auth/ForgotPassword.jsx";
 import { Logout } from "../services/AuthService.js";
-import {ResetPasswordForm } from "../components/ResetPasswordForm.jsx";
+import {ResetPasswordForm } from "../components/Auth/ResetPasswordForm.jsx";
 import OTPLogin from "../pages/Auth/LoginOTP.jsx";
 import Layout from "../pages/Layout.jsx";
-import { EmailVerification } from "../components/EmailVerification.jsx";
+import { EmailVerification } from "../components/Auth/EmailVerification.jsx";
 import { PrivateRoute, PublicRoute } from "../components/RouteGuards.jsx";
 
 const AppRoutes = () => {
@@ -36,9 +36,7 @@ const AppRoutes = () => {
         <Route
           index
           element={
-            <PrivateRoute>
               <App />
-            </PrivateRoute>
           }
         />
         <Route

@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { requestPasswordReset } from "../services/AuthService";
+import { requestPasswordReset } from "../../services/AuthService";
 import { Mail} from 'lucide-react';
 import toast , { Toaster } from 'react-hot-toast';
 import { GridLoader } from "react-spinners";

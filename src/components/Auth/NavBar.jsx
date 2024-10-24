@@ -1,9 +1,9 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { DarkModeToggler } from "./DarkModeToggler";
+import { DarkModeToggler } from "../DarkModeToggler";
 import { Link } from "react-router-dom";
 import { isAuthenticated } from "./RouteGuards";
-import LogoutButton from "./LogoutButton";
+import LogoutButton from "./Auth/LogoutButton";
 import { Menu, X } from "lucide-react";
 import Sidebar from "./Sidebar";
 

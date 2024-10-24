@@ -1,5 +1,5 @@
 import React from "react";
-import  LogoutButton  from "../components/LogoutButton";
+import  LogoutButton  from "../components/Auth/LogoutButton";
 import { Link } from "react-router-dom";
 
 export const Home = () => {
@@ -18,8 +18,8 @@ export const Home = () => {
                 className="w-6 h-6"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"
                 />
               </svg>
@@ -35,7 +35,7 @@ export const Home = () => {
             <div className="flex items-center w-full mt-6 gap-x-3 shrink-0 sm:w-auto">
               <p><LogoutButton /></p>
 
-              <Link to={"https://documenter.getpostman.com/view/32635893/2sAXxJha9M"} target="__blank">
+              <Link to={"https://documenter.getpostman.com/view/32635893/2sAY4rFkfi"} target="__blank">
                 <button className="w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-violet-500 rounded-lg shrink-0 sm:w-auto hover:bg-violet-600 dark:hover:bg-violet-500 dark:bg-violet-600">
                   API Docs
                 </button>
