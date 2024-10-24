@@ -70,7 +70,18 @@ export const Dashboard = () => {
               total: "5000"
               },
               ]}
-
+         />
+         <StatisticsTable 
+          head = {["Restaurant", "Owner", "Sales"]}
+          data = {[
+            {
+              name: "The Big Restaurant",
+              creation : "10-11-1998",
+              email: "Restaurant.User",
+              phoneNumber: "user@email.cc",
+              orders: "777",
+              total: "5000"
+              },]}
          />
          </grid>
         </div>
