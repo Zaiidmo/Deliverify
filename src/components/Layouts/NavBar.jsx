@@ -10,7 +10,7 @@ const NavBar = () => {
 
   return (
     <>
-      <header className=" fixed z-30 w-full h-18 font-poppins py-3 flex justify-between items-center text-black dark:text-white bg-[rgba(255,255,255,0.13)] backdrop-blur-[10px] shadow-[0_0_40px_rgba(8,7,16,0.6)] px-[35px] rounded-b-[5px] border-b-2 border-solid border-[rgba(255,255,255,0.1)] dark:bg-[rgba(0,0,0,0.5)]">
+      <header className=" fixed z-30 w-full h-20 font-poppins py-3 flex justify-between items-center text-black dark:text-white bg-[rgba(255,255,255,0.13)] backdrop-blur-[10px] shadow-[0_0_40px_rgba(8,7,16,0.6)] px-[35px] rounded-b-[5px] border-b-2 border-solid border-[rgba(255,255,255,0.1)] dark:bg-[rgba(0,0,0,0.5)]">
         <div className="px-4 max-w-screen-xl mx-auto w-full ">
           <div className="flex items-center justify-between">
             <div className="flex shrink-0">
@@ -19,10 +19,10 @@ const NavBar = () => {
                 className="flex items-center text-black dark:text-white"
                 to="/"
               >
-                <img src="/logo-desktop-white.png" className="w-20 hidden dark:md:block" />
-                <img src="/logo-desktop-black.png" className="w-20 dark:hidden hidden md:block" />
-                <img src="/logo-mobile-white.png" className="w-10 hidden dark:block dark:md:hidden md:hidden" />
-                <img src="/logo-mobile-black.png" className="w-10 dark:hidden md:hidden" />
+                <img src="/logo-desktop-white.png" className="w-32 hidden dark:md:block" />
+                <img src="/logo-desktop-black.png" className="w-32 dark:hidden hidden md:block" />
+                <img src="/logo-mobile-white.png" className="w-14 hidden dark:block dark:md:hidden md:hidden" />
+                <img src="/logo-mobile-black.png" className="w-14 dark:hidden md:hidden" />
               </Link>
             </div>
             <div className="flex items-center justify-end gap-3">
