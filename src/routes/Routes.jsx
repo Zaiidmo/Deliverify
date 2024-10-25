@@ -11,7 +11,7 @@ import OTPLogin from "../pages/Auth/LoginOTP.jsx";
 import Layout from "../pages/Layout.jsx";
 import { EmailVerification } from "../components/Auth/EmailVerification.jsx";
 import { PrivateRoute, PublicRoute } from "../components/RouteGuards.jsx";
-import {UserProfile} from "../pages/Delivery/UserProfile.jsx";
+import UserProfile from "../pages/Delivery/UserProfile.jsx";
 
 
 const AppRoutes = () => {
