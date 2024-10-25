@@ -6,18 +6,11 @@ import React, { useEffect, useState } from "react";
 
 const Sidebar = () => {
   const [isAuth, setIsAuth] = useState(isAuthenticated());
+  const [isOpened, setIsOpened] = useState(false);
 
   useEffect(() => {
-    const checkAuth = () => {
-      setIsAuth(isAuthenticated());
-    };
-
-    window.addEventListener("authChange", checkAuth);
-
-    return () => {
-      window.removeEventListener("authChange", checkAuth);
-    };
-  }, []);
+    setIsOpened(false);
+  }, [isAuth]);
 
   return (
     <div
@@ -59,7 +52,7 @@ const Sidebar = () => {
             <SidebarButton
               label="Restaurants"
               icon={<ChefHat/>}
-              href={"#"}
+              href={"dashboard/restaurants"}
             />
             <SidebarButton
               label="Meals"

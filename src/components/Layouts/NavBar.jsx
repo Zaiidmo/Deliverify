@@ -4,10 +4,16 @@ import { DarkModeToggler } from "./DarkModeToggler";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import Sidebar from "./Sidebar";
+import { isAuthenticated } from "../RouteGuards";
 
 const NavBar = () => {
+  const [isAuth, setIsAuth] = useState(isAuthenticated());
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  useEffect(() => {
+    setIsAuth(isAuthenticated());
+    setIsMenuOpen(false); 
+  }, [isAuthenticated()]);
   return (
     <>
       <header className=" fixed z-30 w-full h-20 font-poppins py-3 flex justify-between items-center text-black dark:text-white bg-[rgba(255,255,255,0.13)] backdrop-blur-[10px] shadow-[0_0_40px_rgba(8,7,16,0.6)] px-[35px] rounded-b-[5px] border-b-2 border-solid border-[rgba(255,255,255,0.1)] dark:bg-[rgba(0,0,0,0.5)]">
