@@ -45,9 +45,18 @@ export const Users = () => {
             email: user.email || "N/A",
             phoneNumber: user.phoneNumber || "N/A",
             CIN: user.CIN || "N/A",
-            role: user.role || "N/A",
+            role: user.roles.length > 0 ? (
+              <div className="flex flex-wrap gap-2">
+                  {user.roles.map((role) => (
+                      <span key={role.id} className="bg-yellow-500 text-black px-2 py-1 rounded">
+                          {role.name}
+                      </span>
+                  ))}
+              </div>
+          ) : "N/A",
             isBanned: user.isBanned ? "Yes" : "No",
           }));
+          console.log("roles", formattedData);
 
           setTableData(formattedData);
           notify({
