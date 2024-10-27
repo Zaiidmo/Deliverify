@@ -23,7 +23,7 @@ export const Restaurants = () => {
   const [restaurantCreation, setRestaurantCreation] = useState(0);
 
   const handleUserCreationSuccess = () => {
-    setRestaurantCreation(1); 
+    setRestaurantCreation(1);
   };
 
   const notify = ({ message, type = "info", duration }) => {
@@ -132,14 +132,19 @@ export const Restaurants = () => {
               <div className="bg-white rounded-lg p-8 w-11/12 max-w-md shadow-lg">
                 <button
                   onClick={() => setIsModalOpen(false)}
-                  className="absolute top-2 right-2"
+                  className="absolute top-12 right-2"
                 >
                   X
                 </button>
                 {/* Your form component goes here */}
-                { restaurantCreation === 0 ?
-                  <CreateUserForm onUserCreationSuccess={handleUserCreationSuccess} /> 
-                  : <p>Restaurant Creation Form</p>}
+                {restaurantCreation === 0 ? (
+                  <CreateUserForm
+                    onUserCreationSuccess={handleUserCreationSuccess}
+                    onClose={() => setIsModalOpen(false)}
+                  />
+                ) : (
+                  <p>Restaurant Creation Form</p>
+                )}
               </div>
             </div>
           )}
