@@ -1,33 +1,25 @@
-import { DoorOpen, Home, LogIn, LogOut } from "lucide-react";
-import React, { useEffect, useState } from "react";
-import { isAuthenticated } from "../RouteGuards";
-import { Link } from "react-router-dom";
-import { Bell, User } from "lucide-react";
-import { SidebarButton } from "./SidebarButton";
 import LogoutButton from "../Auth/LogoutButton";
+import { isAuthenticated } from "../RouteGuards";
+import { SidebarButton } from "./SidebarButton";
+import { ChefHat, DoorOpen, Home, LayoutDashboard, LogIn, LogOut, Sandwich } from "lucide-react";
+import React, { useEffect, useState } from "react";
+
 const Sidebar = () => {
   const [isAuth, setIsAuth] = useState(isAuthenticated());
+  const [isOpened, setIsOpened] = useState(false);
 
   useEffect(() => {
-    const checkAuth = () => {
-      setIsAuth(isAuthenticated());
-    };
-
-    window.addEventListener("authChange", checkAuth);
-
-    return () => {
-      window.removeEventListener("authChange", checkAuth);
-    };
-  }, []);
+    setIsOpened(false);
+  }, [isAuth]);
 
   return (
     <div
       id="drawer-navigation"
-      className="fixed top-[4.5rem] right-0 z-20 h-screen p-4 overflow-y-auto transition-transform font-poppins  text-black dark:text-white bg-[rgba(255,255,255,0.13)] backdrop-blur-[10px] shadow-[0_0_40px_rgba(8,7,16,0.6)] px-[35px] rounded-b-[5px] border-b-2 border-solid border-[rgba(255,255,255,0.1)]  dark:bg-[rgba(0,0,0,0.5)]"
+      className="fixed right-0 z-10 h-screen p-4 overflow-y-auto transition-transform font-poppins  text-black dark:text-white bg-[rgba(255,255,255,0.13)] backdrop-blur-[10px] shadow-[0_0_10px_rgba(8,7,16,0.6)] px-6 rounded-b-[5px]  dark:bg-[rgba(0,0,0,0.5)] flex justify-center items-center"
       tabIndex="-1"
       aria-labelledby="drawer-navigation-label"
     >
-      <div className="flex flex-col justify-center items-center gap-y-2 py-4">
+      <div className="flex flex-col justify-center items-center gap-y-4 py-4">
         {/* Logo */}
         {/* <div className="mb-4">
           <a className="flex-none focus:outline-none focus:opacity-80" href="#">
@@ -44,13 +36,30 @@ const Sidebar = () => {
         {/* Sidebar Menu Items */}
         <SidebarButton label="Home" icon={<Home />} href={"/"} />
         {!isAuth ? (
-        <SidebarButton
-          label="GetStarted"
-          icon={<DoorOpen />}
-          href={"register"}
-        />
+          <SidebarButton
+            label="GetStarted"
+            icon={<DoorOpen />}
+            href={"register"}
+          />
         ) : (
-        <SidebarButton label="Logout" icon={<LogoutButton />}  />
+          <>
+            <SidebarButton label="Logout" icon={<LogoutButton />} />
+            <SidebarButton
+              label="Dashboard"
+              icon={<LayoutDashboard />}
+              href={"dashboard"}
+            />
+            <SidebarButton
+              label="Restaurants"
+              icon={<ChefHat/>}
+              href={"dashboard/restaurants"}
+            />
+            <SidebarButton
+              label="Meals"
+              icon={<Sandwich />}
+              href={"#"}
+            />
+          </>
         )}
       </div>
     </div>
