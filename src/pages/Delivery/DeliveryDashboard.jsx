@@ -133,37 +133,37 @@ const DeliveryDashboard = () => {
   };
  
 
-  // const confirmDelivery = async (orderId) => {
-  //   if (!otpInput) {
-  //     setNotification("Please enter OTP before confirming delivery.");
-  //     return;
-  //   }
+  const confirmDelivery = async (orderId) => {
+    if (!otpInput) {
+      setNotification("Please enter OTP before confirming delivery.");
+      return;
+    }
 
-  //   try {
-  //     const token = localStorage.getItem("token");
-  //     await axios.post(
-  //       "http://localhost:3000/api/order/confirm-delivery",
-  //       {
-  //         orderId,
-  //         OtpConfirm: otpInput,
-  //       },
-  //       {
-  //         headers: { Authorization: `Bearer ${token}` },
-  //       }
-  //     );
+    try {
+      const token = localStorage.getItem("token");
+      await axios.post(
+        "http://localhost:3000/api/order/confirm-delivery",
+        {
+          orderId,
+          OtpConfirm: otpInput,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
 
-  //     setNotification("Delivery confirmed successfully!");
-  //     setSelectedOrder(null);
-  //     setOtpInput("");
-  //     fetchOrders();
-  //   } catch (error) {
-  //     setNotification(
-  //       `Error: ${
-  //         error.response?.data?.message || "Failed to confirm delivery"
-  //       }`
-  //     );
-  //   }
-  // };
+      setNotification("Delivery confirmed successfully!");
+      setSelectedOrder(null);
+      setOtpInput("");
+      fetchOrders();
+    } catch (error) {
+      setNotification(
+        `Error: ${
+          error.response?.data?.message || "Failed to confirm delivery"
+        }`
+      );
+    }
+  };
 
   if (loading) {
     return (
