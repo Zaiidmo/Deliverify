@@ -1,4 +1,4 @@
-import { Ban, CheckCheck, CircleX, Pencil, Trash2, X } from "lucide-react";
+import { Ban, CheckCheck, CircleX, Pencil, X } from "lucide-react";
 import React from "react";
 
 export const StatisticsTable = ({
