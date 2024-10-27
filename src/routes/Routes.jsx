@@ -6,11 +6,13 @@ import Register from "../pages/Auth/Register.jsx";
 import Login from "../pages/Auth/Login.jsx";
 import ForgotPassword from "../pages/Auth/ForgotPassword.jsx";
 import { Logout } from "../services/AuthService.js";
-import {ResetPasswordForm } from "../components/Auth/ResetPasswordForm.jsx";
+import { ResetPasswordForm } from "../components/Auth/ResetPasswordForm.jsx";
 import OTPLogin from "../pages/Auth/LoginOTP.jsx";
 import Layout from "../pages/Layout.jsx";
 import { EmailVerification } from "../components/Auth/EmailVerification.jsx";
 import { PrivateRoute, PublicRoute } from "../components/RouteGuards.jsx";
+import { Dashboard } from "../pages/Admin/Dashboard.jsx";
+import { Restaurants } from "../pages/Admin/Restaurants.jsx";
 
 const AppRoutes = () => {
   return (
@@ -33,10 +35,17 @@ const AppRoutes = () => {
             </PublicRoute>
           }
         />
+        <Route index element={<App />} />
+        {/* Private Routes */}
         <Route
-          index
+          path="/dashboard/*"
           element={
-              <App />
+            <PrivateRoute>
+              <Routes>
+                <Route path="/" element={<Dashboard />} />
+                <Route path="restaurants" element={<Restaurants />} />
+              </Routes>
+            </PrivateRoute>
           }
         />
         <Route
