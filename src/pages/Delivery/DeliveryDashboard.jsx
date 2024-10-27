@@ -110,27 +110,27 @@ const DeliveryDashboard = () => {
     return () => socket.disconnect();
   }, []);
 
-  // const fetchOrders = async () => {
-  //   try {
-  //     setLoading(true);
-  //     setError(null);
-  //     const token = localStorage.getItem("token");
-  //     const response = await axios.get(
-  //       "http://localhost:3000/api/order/pending-orders",
-  //       {
-  //         headers: { Authorization: `Bearer ${token}` },
-  //       }
-  //     );
-  //     setOrders(response.data.orders || []);
-  //     console.log(response);
-  //   } catch (error) {
-  //     console.error("Error fetching orders:", error);
-  //     setError(error.response?.data?.message || "Failed to fetch orders");
-  //     setOrders([]);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+  const fetchOrders = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const token = localStorage.getItem("token");
+      const response = await axios.get(
+        "http://localhost:3000/api/order/pending-orders",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      setOrders(response.data.orders || []);
+      console.log(response);
+    } catch (error) {
+      console.error("Error fetching orders:", error);
+      setError(error.response?.data?.message || "Failed to fetch orders");
+      setOrders([]);
+    } finally {
+      setLoading(false);
+    }
+  };
  
 
   // const confirmDelivery = async (orderId) => {
