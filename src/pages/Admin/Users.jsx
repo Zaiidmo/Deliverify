@@ -46,7 +46,7 @@ export const Users = () => {
             phoneNumber: user.phoneNumber || "N/A",
             CIN: user.CIN || "N/A",
             role: user.role || "N/A",
-            isBanned: user.isBanned === true ? "Yes" : "No",
+            isBanned: user.isBanned ? "Yes" : "No",
           }));
 
           setTableData(formattedData);
@@ -69,12 +69,14 @@ export const Users = () => {
     fetchData();
   }, []);
 
-  const handleBanUser = async (UserToBanId) => {
+  const handleBanUser = async (userId) => {
     setLoading(true);
+    console.log("User to ban:", userId);
+    
     const token = localStorage.getItem("accessToken");
   
     try {
-      const response = await banUser(UserToBanId, token);
+      const response = await banUser(userId, token);
       console.log("Response from banUser:", response);
       if (response && response.message === "User banned") {
         notify({
@@ -83,7 +85,7 @@ export const Users = () => {
         });
         setTableData((prevData) =>
           prevData.map((user) =>
-            user.id === UserToBanId
+            user.id === userId
               ? { ...user, isBanned: "Yes" }
               : user
           )

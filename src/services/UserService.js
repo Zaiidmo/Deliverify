@@ -32,11 +32,15 @@ export const getAllUsers = async (token) => {
 
 export const banUser = async (userId, token) => {
   try {
-    const response = await apiClient.put(`/users/banneUser/${userId}`, {
+    const id = userId;
+    console.log("User to ban:", id);
+    
+    const response = await apiClient.put(`/users/banneUser/${id}`, {}, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
+    console.log(response);
     return response.data;
   } catch (error) {
     console.error(error);

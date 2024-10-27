@@ -119,7 +119,7 @@ export const StatisticsTable = ({
                       />
                     </button>
                   )}
-                  {onBanUser && (
+                  {onBanUser && item.isBanned === "No" && (
                     <button
                       onClick={() => onBanUser(item.id)}
                       className="p-1 hover:bg-red-200 dark:hover:bg-red-600 rounded"
