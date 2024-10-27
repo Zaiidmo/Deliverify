@@ -85,15 +85,18 @@ export const StatisticsTable = ({
                       />
                     </button>
                   )}
-                  {onDelete && (
+                  {onDelete && item.isApprouved === "Yes" && (
                     <button
-                      onClick={() => onDelete(item)}
+                      onClick={() => onDelete(item.id)}
                       className="p-1 hover:bg-red-200 dark:hover:bg-red-600 rounded"
                     >
-                      <X size={16} className="text-red-500 dark:text-red-300" />
+                      <X
+                        size={16}
+                        className="text-red-500 dark:text-red-300"
+                      />
                     </button>
                   )}
-                  {onApprove && (
+                  {onApprove && item.isApprouved === "No" && (
                     <button
                       onClick={() => onApprove(item.id)}
                       className="p-1 hover:bg-green-200 dark:hover:bg-green-600 rounded"

@@ -120,12 +120,8 @@ export const Restaurants = () => {
             data={tableData}
             showActions={true}
             onApprove={handleAcceptRestaurant}
+            onDelete={() => { console.log("Delete clicked") }}
           />
-        ), 
-        tableData.length === 0 && (
-          <div className="text-center text-lg text-gray-700 dark:text-gray-300">
-            No Pending Restaurants to show
-          </div>
         )
         )}
       </div>
