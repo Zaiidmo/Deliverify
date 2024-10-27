@@ -100,6 +100,7 @@ export const Restaurants = () => {
       setLoading(false);
     }
   };
+  
 
   return (
     <>
@@ -113,12 +114,19 @@ export const Restaurants = () => {
             <PropagateLoader color="#622BBC" size={15} />
           </div>
         ) : (
+        tableData.length > 0 &&  (
           <StatisticsTable
             head={tableHeader}
             data={tableData}
             showActions={true}
             onApprove={handleAcceptRestaurant}
           />
+        ), 
+        tableData.length === 0 && (
+          <div className="text-center text-lg text-gray-700 dark:text-gray-300">
+            No Pending Restaurants to show
+          </div>
+        )
         )}
       </div>
     </>
