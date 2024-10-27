@@ -84,13 +84,13 @@ export const CreateUserForm = () => {
       const token = localStorage.getItem("accessToken");
       const response = await createManager(formData, token);
       if (response) {
+        console.log(response);
+        
+        localStorage.setItem("id", response.user.id);
         notify({
           message:
-            "Registered successfully. Please check your email for verification link.",
+            "User Created Succenfully.",
           type: "success",
-        });
-        setTimeout(() => {
-          navigate("/login", 0);
         });
       }
     } catch (error) {
