@@ -12,7 +12,6 @@ export const Restaurants = () => {
     { label: "Deletion Status", fields: ["isDeleted"] },
   ];
 
-  // State to hold table data fetched from API
   const [tableData, setTableData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -23,41 +22,34 @@ export const Restaurants = () => {
     });
   };
 
-  // Notify on loading state change
+  // Fetch data from API when component mounts
   useEffect(() => {
-    if (loading) {
+    const fetchData = async () => {
+      setLoading(true);
       notify({
         message: "Getting Restaurants Data ...",
         type: "loading",
         duration: 1000,
       });
-    }
-  }, [loading]);
+      const token = localStorage.getItem("accessToken");
 
-  // Fetch data from API when component mounts
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      const token = localStorage.getItem('accessToken');
       try {
         const response = await fetchAllRestaurants(token);
         if (response) {
-          // Map the response to match the table structure expected
-          const formattedData = response.map(restaurant => ({
+          const formattedData = response.map((restaurant) => ({
             ...restaurant,
             owner: restaurant.owner ? restaurant.owner.username : "N/A",
-            email: restaurant.owner ? restaurant.owner.email : "N/A", 
-            isApprouved: restaurant.isApprouved === true ? "Yes": "No", 
-            isDeleted: restaurant.isDeleted === true ? "Yes" : "No",
-            id: restaurant._id
+            email: restaurant.owner ? restaurant.owner.email : "N/A",
+            isApprouved: restaurant.isApprouved ? "Yes" : "No",
+            isDeleted: restaurant.isDeleted ? "Yes" : "No",
+            id: restaurant._id,
           }));
-          
-          setTableData(formattedData); 
+
+          setTableData(formattedData);
           notify({
             message: "All Restaurants are retrieved successfully.",
             type: "success",
           });
-          console.log(formattedData); // Logging the formatted data
         }
       } catch (error) {
         notify({
@@ -70,31 +62,27 @@ export const Restaurants = () => {
       }
     };
 
-    // console.log(tableData);
     fetchData();
-    
-  }, []); 
+  }, []);
 
-  // Approve Restaurant ::
   const handleAcceptRestaurant = async (restaurantId) => {
     setLoading(true);
-    const data = {
-      restaurantId: restaurantId,
-    };
-
     const token = localStorage.getItem("accessToken");
 
     try {
-
       const response = await acceptRestaurant(restaurantId, token);
-      // console.log(data);
       if (response) {
         notify({
           message: "Restaurant Accepted.",
           type: "success",
         });
-        // Fetch the updated data after accepting a restaurant
-        // fetchData(); // Call fetchData again to refresh the list
+        setTableData((prevData) =>
+          prevData.map((restaurant) =>
+            restaurant.id === restaurantId
+              ? { ...restaurant, isApprouved: "Yes" }
+              : restaurant
+          )
+        );
       } else {
         notify({
           message: "Failed to accept the restaurant.",
@@ -111,9 +99,7 @@ export const Restaurants = () => {
     } finally {
       setLoading(false);
     }
-};
-
-
+  };
 
   return (
     <>
