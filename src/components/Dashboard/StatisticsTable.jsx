@@ -1,4 +1,4 @@
-import { CheckCheck, CircleX, Pencil, X } from "lucide-react";
+import { Ban, CheckCheck, CircleX, Pencil, X } from "lucide-react";
 import React from "react";
 
 export const StatisticsTable = ({
@@ -8,6 +8,7 @@ export const StatisticsTable = ({
   onDelete,
   onApprove,
   onDeny,
+  onBanUser,
   showActions = false, // Default to false if not specified
 }) => {
   return (
@@ -113,6 +114,17 @@ export const StatisticsTable = ({
                       className="p-1 hover:bg-red-200 dark:hover:bg-red-600 rounded"
                     >
                       <CircleX
+                        size={16}
+                        className="text-red-500 dark:text-red-300"
+                      />
+                    </button>
+                  )}
+                  {onBanUser && item.isBanned === "No" && (
+                    <button
+                      onClick={() => onBanUser(item.id)}
+                      className="p-1 hover:bg-red-200 dark:hover:bg-red-600 rounded"
+                    >
+                      <Ban
                         size={16}
                         className="text-red-500 dark:text-red-300"
                       />
