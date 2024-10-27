@@ -11,6 +11,8 @@ import OTPLogin from "../pages/Auth/LoginOTP.jsx";
 import Layout from "../pages/Layout.jsx";
 import { EmailVerification } from "../components/Auth/EmailVerification.jsx";
 import { PrivateRoute, PublicRoute } from "../components/RouteGuards.jsx";
+import RestoManager from "../pages/Restaurants/RestoManager.jsx";
+import AddRestaurant from "../components/Restaurant/AddRestaurant.jsx";
 
 const AppRoutes = () => {
   return (
@@ -47,7 +49,26 @@ const AppRoutes = () => {
             </PrivateRoute>
           }
         />
+
+<Route
+          path="dashboard"
+          element={
+            
+              <RestoManager />
+            
+          }
+        />
+        
+        <Route
+          path="manager/add-restaurant"
+          element={
+           
+              <AddRestaurant />
+           
+          }
+        />
       </Route>
+      
     </Routes>
   );
 };

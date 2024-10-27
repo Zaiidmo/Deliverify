@@ -1,4 +1,4 @@
-import { DoorOpen, Home, LogIn, LogOut } from "lucide-react";
+import { DoorOpen, Home, LogIn, LogOut, List } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { isAuthenticated } from "../RouteGuards";
 import { Link } from "react-router-dom";
@@ -43,6 +43,13 @@ const Sidebar = () => {
 
         {/* Sidebar Menu Items */}
         <SidebarButton label="Home" icon={<Home />} href={"/"} />
+        <SidebarButton
+              label="Resto Manager"
+              icon={<List />}
+              href={"dashboard"}
+            />
+        {/* <SidebarButton label="Ajouter Restaurant" icon={<PlusSquare />} href={"/dashboard"} /> */}
+      
         {!isAuth ? (
         <SidebarButton
           label="GetStarted"
