@@ -7,6 +7,7 @@ import {
 import toast, { Toaster } from "react-hot-toast";
 import { PropagateLoader } from "react-spinners";
 import { CreateUserForm } from "../../components/Dashboard/CreateUserModal";
+import { CreateRestaurantForm } from "../../components/Dashboard/CreateRestaurantModal";
 
 export const Restaurants = () => {
   const tableHeader = [
@@ -19,7 +20,11 @@ export const Restaurants = () => {
   const [tableData, setTableData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [restaurantCreation, setRestaurantCreation] = useState(1);
+  const [restaurantCreation, setRestaurantCreation] = useState(0);
+
+  const handleUserCreationSuccess = () => {
+    setRestaurantCreation(1); 
+  };
 
   const notify = ({ message, type = "info", duration }) => {
     toast[type](message, {
@@ -132,9 +137,9 @@ export const Restaurants = () => {
                   X
                 </button>
                 {/* Your form component goes here */}
-                { restaurantCreation === 1 ?
-                  <CreateUserForm /> 
-                  : <CreateRestaurantForm />}
+                { restaurantCreation === 0 ?
+                  <CreateUserForm onUserCreationSuccess={handleUserCreationSuccess} /> 
+                  : <p>Restaurant Creation Form</p>}
               </div>
             </div>
           )}

@@ -9,7 +9,7 @@ import { User, Phone, KeyRound, Eye, EyeOff, Mail, X } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 import { Modal } from "react-modal";
 
-export const CreateUserForm = () => {
+export const CreateUserForm = ({ onUserCreationSuccess }) => {
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
   const [Loading, setLoading] = useState(false);
@@ -85,14 +85,14 @@ export const CreateUserForm = () => {
       const response = await createManager(formData, token);
       if (response) {
         console.log(response);
-        
+
         localStorage.setItem("id", response.user.id);
         notify({
-          message:
-            "User Created Succenfully.",
+          message: "User Created Succenfully.",
           type: "success",
         });
       }
+      onUserCreationSuccess();
     } catch (error) {
       setError(error.response?.data?.message || error.message);
       notify({ message: error.message, type: "error" });
@@ -114,7 +114,7 @@ export const CreateUserForm = () => {
         className="text-black text-left w-full flex flex-col dark:text-white max-w-screen-sm lg:max-w-screen-md bg-[rgba(255,255,255,0.13)] absolute -translate-x-2/4 -translate-y-2/4 backdrop-blur-[10px] shadow-[0_0_40px_rgba(8,7,16,0.6)] px-[35px] py-[50px] rounded-[10px] border-2 border-solid border-[rgba(255,255,255,0.1)] left-2/4 dark:bg-[rgba(0,0,0,0.5)]"
         onSubmit={handleRegister}
       >
-      <X size={20} className="text-gray-400" />
+        <X size={20} className="text-gray-400" />
         <h3 className="text-[32px] mb-10 font-medium leading-[42px] text-center font-titles">
           Create a User
         </h3>
