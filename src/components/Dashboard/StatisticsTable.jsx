@@ -30,7 +30,7 @@ export const StatisticsTable = ({
           {data.map((item, i) => (
             <tr key={i} className="hover:bg-gray-300 rounded-full dark:hover:bg-gray-800">
               {head.map((col, j) => (
-                <td key={j} className="p-2">
+                <td key={j} className="p-2 ">
                   {/* If column requires multiple fields */}
                   {Array.isArray(col.fields) ? (
                     col.fields.map((field, index) => (
