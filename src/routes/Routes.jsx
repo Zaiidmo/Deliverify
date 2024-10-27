@@ -18,6 +18,7 @@ const AppRoutes = () => {
   return (
     <Routes>
       {/* Layout Route */}
+      
       <Route path="/" element={<Layout />}>
         {/* Public Routes */}
         <Route
@@ -35,7 +36,6 @@ const AppRoutes = () => {
             </PublicRoute>
           }
         />
-          <Route path="profile" element={<UserProfile />} />
         <Route index element={<App />} />
         <Route
           path="logout"
@@ -45,15 +45,17 @@ const AppRoutes = () => {
             </PrivateRoute>
           }
         />
-        {/* <Route
-          path="user-profile"
+        
+        <Route
+          path="profile"
           element={
             <PrivateRoute>
               <UserProfile />
             </PrivateRoute>
           }
-        /> */}
+        />
       </Route>
+      
     </Routes>
   );
 };
