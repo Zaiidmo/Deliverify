@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { StatisticsTable } from "../../components/Dashboard/StatisticsTable";
-import { fetchAllRestaurants } from "../../services/RestaurantsService";
+import { fetchAllRestaurants, acceptRestaurant } from "../../services/RestaurantsService";
 import toast, { Toaster } from "react-hot-toast";
 import { PropagateLoader } from "react-spinners";
 
@@ -49,6 +49,7 @@ export const Restaurants = () => {
             email: restaurant.owner ? restaurant.owner.email : "N/A", 
             isApprouved: restaurant.isApprouved === true ? "Yes": "No", 
             isDeleted: restaurant.isDeleted === true ? "Yes" : "No",
+            id: restaurant._id
           }));
           
           setTableData(formattedData); 
@@ -69,10 +70,50 @@ export const Restaurants = () => {
       }
     };
 
-    console.log(tableData);
+    // console.log(tableData);
     fetchData();
     
   }, []); 
+
+  // Approve Restaurant ::
+  const handleAcceptRestaurant = async (restaurantId) => {
+    setLoading(true);
+    const data = {
+      restaurantId: restaurantId,
+    };
+
+    const token = localStorage.getItem("accessToken");
+
+    try {
+
+      const response = await acceptRestaurant(restaurantId, token);
+      // console.log(data);
+      if (response) {
+        notify({
+          message: "Restaurant Accepted.",
+          type: "success",
+        });
+        // Fetch the updated data after accepting a restaurant
+        // fetchData(); // Call fetchData again to refresh the list
+      } else {
+        notify({
+          message: "Failed to accept the restaurant.",
+          type: "error",
+        });
+      }
+    } catch (err) {
+      notify({
+        message: "Something went wrong... please try again later.",
+        type: "error",
+        duration: 3000,
+      });
+      console.error("Error accepting restaurant", err);
+    } finally {
+      setLoading(false);
+    }
+};
+
+
 
   return (
     <>
@@ -90,7 +131,7 @@ export const Restaurants = () => {
             head={tableHeader}
             data={tableData}
             showActions={true}
-            onApprove={() => console.log("Approved")}
+            onApprove={handleAcceptRestaurant}
           />
         )}
       </div>

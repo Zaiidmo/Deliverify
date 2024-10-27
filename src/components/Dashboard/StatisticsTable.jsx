@@ -21,14 +21,18 @@ export const StatisticsTable = ({
                 {col.label}
               </th>
             ))}
-            {showActions && <th className="p-2 pl-0 capitalize">Actions</th>} {/* Add actions column conditionally */}
+            {showActions && <th className="p-2 pl-0 capitalize">Actions</th>}{" "}
+            {/* Add actions column conditionally */}
           </tr>
         </thead>
 
         {/* Table Body */}
         <tbody>
           {data.map((item, i) => (
-            <tr key={i} className="hover:bg-gray-300 rounded-full dark:hover:bg-gray-800">
+            <tr
+              key={i}
+              className="hover:bg-gray-300 rounded-full dark:hover:bg-gray-800"
+            >
               {head.map((col, j) => (
                 <td key={j} className="p-2 ">
                   {/* If column requires multiple fields */}
@@ -71,23 +75,44 @@ export const StatisticsTable = ({
               {showActions && (
                 <td className="p-2 pl-0">
                   {onEdit && (
-                    <button onClick={() => onEdit(item)} className="p-1 hover:bg-blue-200 dark:hover:bg-blue-600 rounded">
-                      <Pencil size={16} className="text-blue-500 dark:text-blue-300" />
+                    <button
+                      onClick={() => onEdit(item)}
+                      className="p-1 hover:bg-blue-200 dark:hover:bg-blue-600 rounded"
+                    >
+                      <Pencil
+                        size={16}
+                        className="text-blue-500 dark:text-blue-300"
+                      />
                     </button>
                   )}
                   {onDelete && (
-                    <button onClick={() => onDelete(item)} className="p-1 hover:bg-red-200 dark:hover:bg-red-600 rounded">
+                    <button
+                      onClick={() => onDelete(item)}
+                      className="p-1 hover:bg-red-200 dark:hover:bg-red-600 rounded"
+                    >
                       <X size={16} className="text-red-500 dark:text-red-300" />
                     </button>
                   )}
                   {onApprove && (
-                    <button onClick={() => onApprove(item)} className="p-1 hover:bg-green-200 dark:hover:bg-green-600 rounded">
-                      <CheckCheck size={16} className="text-green-500 dark:text-green-300" />
+                    <button
+                      onClick={() => onApprove(item.id)}
+                      className="p-1 hover:bg-green-200 dark:hover:bg-green-600 rounded"
+                    >
+                      <CheckCheck
+                        size={16}
+                        className="text-green-500 dark:text-green-300"
+                      />
                     </button>
                   )}
                   {onDeny && (
-                    <button onClick={() => onDeny(item)} className="p-1 hover:bg-red-200 dark:hover:bg-red-600 rounded">
-                      <CircleX size={16} className="text-red-500 dark:text-red-300" />
+                    <button
+                      onClick={() => onDeny(item)}
+                      className="p-1 hover:bg-red-200 dark:hover:bg-red-600 rounded"
+                    >
+                      <CircleX
+                        size={16}
+                        className="text-red-500 dark:text-red-300"
+                      />
                     </button>
                   )}
                 </td>
