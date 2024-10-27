@@ -91,7 +91,7 @@ export const StatisticsTable = ({
                       onClick={() => onDelete(item.id)}
                       className="p-1 hover:bg-red-200 dark:hover:bg-red-600 rounded"
                     >
-                      <X
+                      <Trash2
                         size={16}
                         className="text-red-500 dark:text-red-300"
                       />
