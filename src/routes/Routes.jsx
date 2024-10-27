@@ -14,12 +14,13 @@ import { PrivateRoute, PublicRoute } from "../components/RouteGuards.jsx";
 import UserProfile from "../pages/Delivery/UserProfile.jsx";
 import { Dashboard } from "../pages/Admin/Dashboard.jsx";
 import { Restaurants } from "../pages/Admin/Restaurants.jsx";
+import  DeliveryDashboard  from "../pages/Delivery/DeliveryDashboard.jsx";
 
 const AppRoutes = () => {
   return (
     <Routes>
       {/* Layout Route */}
-      
+
       <Route path="/" element={<Layout />}>
         {/* Public Routes */}
         <Route
@@ -60,7 +61,7 @@ const AppRoutes = () => {
             </PrivateRoute>
           }
         />
-        
+
         <Route
           path="profile"
           element={
@@ -69,8 +70,9 @@ const AppRoutes = () => {
             </PrivateRoute>
           }
         />
+
+        <Route path="DeliveryDashboard" element={<DeliveryDashboard />} />
       </Route>
-      
     </Routes>
   );
 };
