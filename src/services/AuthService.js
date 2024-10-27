@@ -111,3 +111,16 @@ export const resetPassword = async (token, newPassword, confirmNewPassword) => {
     handleError(error);
   }
 };
+
+export const createManager = async (managerData, token) => {
+  try {
+    const response = await apiClient.post("/users/createUser", managerData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return handleResponse(response);
+  } catch (error) {
+    handleError(error);
+  }
+}
