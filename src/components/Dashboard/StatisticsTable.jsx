@@ -39,7 +39,7 @@ export const StatisticsTable = ({
                   {/* If column requires multiple fields */}
                   {Array.isArray(col.fields) ? (
                     col.fields.map((field, index) => (
-                      <div key={index} className="text-xs opacity-75">
+                      <div key={index} className="text-xs">
                         {item[field] || "N/A"}
                       </div>
                     ))
