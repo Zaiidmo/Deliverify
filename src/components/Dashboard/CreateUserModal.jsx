@@ -1,15 +1,15 @@
 import { useState } from "react";
-import { createManager, registerClient } from "../../services/AuthService";
+import { createManager } from "../../services/AuthService";
 import {
   validateField,
   validateForm,
   hasFormErrors,
 } from "../../helper/AuthFormValidator";
-import { User, Phone, KeyRound, Eye, EyeOff, Mail, X } from "lucide-react";
+import { User, Phone, KeyRound, Eye, EyeOff, Mail, X, IdCard } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 import { Modal } from "react-modal";
 
-export const CreateUserForm = ({ onUserCreationSuccess }) => {
+export const CreateUserForm = ({ onUserCreationSuccess, onClose }) => {
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
   const [Loading, setLoading] = useState(false);
@@ -38,6 +38,7 @@ export const CreateUserForm = ({ onUserCreationSuccess }) => {
     lname: "",
     username: "",
     email: "",
+    CIN: "",
     phoneNumber: "",
     password: "",
   });
@@ -114,14 +115,17 @@ export const CreateUserForm = ({ onUserCreationSuccess }) => {
         className="text-black text-left w-full flex flex-col dark:text-white max-w-screen-sm lg:max-w-screen-md bg-[rgba(255,255,255,0.13)] absolute -translate-x-2/4 -translate-y-2/4 backdrop-blur-[10px] shadow-[0_0_40px_rgba(8,7,16,0.6)] px-[35px] py-[50px] rounded-[10px] border-2 border-solid border-[rgba(255,255,255,0.1)] left-2/4 dark:bg-[rgba(0,0,0,0.5)]"
         onSubmit={handleRegister}
       >
-        <X size={20} className="text-gray-400" />
+        <button
+          onClick={onClose}
+          className="p-1 hover:bg-yellow-200 dark:hover:bg-yellow-600 rounded w-fit"
+        >
+          <X size={16} className="text-yellow-500 hover:text-black " />
+        </button>{" "}
         <h3 className="text-[32px] mb-10 font-medium leading-[42px] text-center font-titles">
           Create a User
         </h3>
-
         {/* Error Message */}
         {error && <p className="text-red-500 text-center">{error}</p>}
-
         {/* Name Fields */}
         <div className="flex w-full justify-between gap-2">
           <div className="w-1/2">
@@ -183,7 +187,6 @@ export const CreateUserForm = ({ onUserCreationSuccess }) => {
             )}
           </div>
         </div>
-
         {/* Username & Phone Number Fields */}
         <div className="flex w-full justify-between gap-2">
           <div className="w-1/2">
@@ -245,10 +248,9 @@ export const CreateUserForm = ({ onUserCreationSuccess }) => {
             )}
           </div>
         </div>
-
-        <div className="flex justify-between items-center gap-2">
+        <div className="flex w-full justify-between gap-2">
           {/* Email Field */}
-          <div>
+          <div className="w-1/2">
             <label
               htmlFor="email"
               className="block text-base font-medium mt-[10px]"
@@ -272,9 +274,12 @@ export const CreateUserForm = ({ onUserCreationSuccess }) => {
                 )}`}
               />
             </div>
+            {formErrors.email && (
+            <span className="text-red-500">{formErrors.email}</span>
+          )}
           </div>
           {/* Email Field */}
-          <div>
+          <div className="w-1/2">
             <label
               htmlFor="CIN"
               className="block text-base font-medium mt-[10px]"
@@ -282,7 +287,7 @@ export const CreateUserForm = ({ onUserCreationSuccess }) => {
               CIN
             </label>
             <div className="relative flex items-center mt-2">
-              <Mail
+              <IdCard
                 className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
                 strokeWidth={2.75}
                 size={20}
@@ -298,13 +303,13 @@ export const CreateUserForm = ({ onUserCreationSuccess }) => {
                 )}`}
               />
             </div>
+            {formErrors.CIN && (
+            <span className="text-red-500">{formErrors.CIN}</span>
+          )}
           </div>
 
-          {formErrors.email && (
-            <span className="text-red-500">{formErrors.email}</span>
-          )}
+          
         </div>
-
         {/* Password Field */}
         <label
           htmlFor="password"
@@ -344,7 +349,6 @@ export const CreateUserForm = ({ onUserCreationSuccess }) => {
         {formErrors.password && (
           <span className="text-red-500">{formErrors.password}</span>
         )}
-
         {/* Submit Button */}
         <button
           className="w-1/2 self-center bg-white hover:bg-violet-400 hover:text-white text-lg font-semibold cursor-pointer mt-[20px] px-0 py-[15px] rounded-[10px] dark:bg-gray-800 dark:hover:bg-violet-700 dark:text-white"

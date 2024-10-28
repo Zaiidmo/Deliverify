@@ -8,6 +8,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { PropagateLoader } from "react-spinners";
 import { CreateUserForm } from "../../components/Dashboard/CreateUserModal";
 import { CreateRestaurantForm } from "../../components/Dashboard/CreateRestaurantModal";
+import { Search } from "lucide-react";
 
 export const Restaurants = () => {
   const tableHeader = [
@@ -21,9 +22,10 @@ export const Restaurants = () => {
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [restaurantCreation, setRestaurantCreation] = useState(0);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleUserCreationSuccess = () => {
-    setRestaurantCreation(1); 
+    setRestaurantCreation(1);
   };
 
   const notify = ({ message, type = "info", duration }) => {
@@ -112,6 +114,16 @@ export const Restaurants = () => {
     }
   };
 
+  const handleSearch = (e) => {
+    const query = e.target.value.toLowerCase();
+    setSearchQuery(query);
+  };
+
+  // Filtered table data based on search query
+  const filteredData = tableData.filter((restaurant) =>
+    restaurant.name.toLowerCase().includes(searchQuery)
+  );
+
   return (
     <>
       <Toaster />
@@ -120,26 +132,52 @@ export const Restaurants = () => {
           Restaurants Management
         </h1>
         <div>
-          <button
-            onClick={() => setIsModalOpen(true)}
-            className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-full"
-          >
-            +
-          </button>
+          <div>
+            <div className="w-full flex justify-between items-center mb-4">
+              <div className="relative w-1/2">
+                <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                  <Search
+                    className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                    strokeWidth={2.75}
+                    size={20}
+                  />
+                </div>
+                <input
+                  onKeyUp={handleSearch}
+                  type="text"
+                  id="simple-search"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="Search restaurant name..."
+                  required
+                />
+              </div>
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-full"
+              >
+                +
+              </button>
+            </div>
+          </div>
 
           {isModalOpen && (
             <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 backdrop-blur">
               <div className="bg-white rounded-lg p-8 w-11/12 max-w-md shadow-lg">
                 <button
                   onClick={() => setIsModalOpen(false)}
-                  className="absolute top-2 right-2"
+                  className="absolute top-12 right-2"
                 >
                   X
                 </button>
                 {/* Your form component goes here */}
-                { restaurantCreation === 0 ?
-                  <CreateUserForm onUserCreationSuccess={handleUserCreationSuccess} /> 
-                  : <p>Restaurant Creation Form</p>}
+                {restaurantCreation === 0 ? (
+                  <CreateUserForm
+                    onUserCreationSuccess={handleUserCreationSuccess}
+                    onClose={() => setIsModalOpen(false)}
+                  />
+                ) : (
+                  <p>Restaurant Creation Form</p>
+                )}
               </div>
             </div>
           )}
@@ -149,10 +187,10 @@ export const Restaurants = () => {
             <PropagateLoader color="#622BBC" size={15} />
           </div>
         ) : (
-          tableData.length > 0 && (
+          filteredData.length > 0 && (
             <StatisticsTable
               head={tableHeader}
-              data={tableData}
+              data={filteredData} 
               showActions={true}
               onApprove={handleAcceptRestaurant}
               onDelete={() => {
