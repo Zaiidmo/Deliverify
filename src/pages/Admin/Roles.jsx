@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { StatisticsTable } from "../../components/Dashboard/StatisticsTable";
 import toast, { Toaster } from "react-hot-toast";
 import { PropagateLoader } from "react-spinners";
-import { CreateUserForm } from "../../components/Dashboard/CreateUserModal";
 import { getAllRoles, getAllPermissions } from "../../services/RoleService"; // Assume these are defined
+import { CreateRoleForm } from "../../components/Dashboard/CreateRoleModal";
 
 export const Roles = () => {
   const rolesTableHeader = [
@@ -21,7 +21,7 @@ export const Roles = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [roleCreation, setRoleCreation] = useState(0);
 
-  const handleUserCreationSuccess = () => {
+  const handleRoleCreationSuccess = () => {
     setRoleCreation(1);
   };
 
@@ -128,8 +128,8 @@ export const Roles = () => {
                   X
                 </button>
                 {roleCreation === 0 ? (
-                  <CreateUserForm
-                    onUserCreationSuccess={handleUserCreationSuccess}
+                  <CreateRoleForm
+                    onRoleCreationSuccess={handleRoleCreationSuccess}
                     onClose={() => setIsModalOpen(false)}
                   />
                 ) : (
