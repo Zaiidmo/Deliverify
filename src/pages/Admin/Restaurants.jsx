@@ -133,8 +133,8 @@ export const Restaurants = () => {
         </h1>
         <div>
           <div>
-            <div className="w-full flex justify-between items-center mb-4">
-              <div className="relative w-1/2">
+            <div className="mx-4 md:w-full flex justify-between items-center mb-4">
+              <div className="relative w-2/3 md:w-1/2">
                 <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                   <Search
                     className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
