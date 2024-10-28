@@ -8,7 +8,6 @@ import {
   Mail,
   X,
   IdCard,
-  KeyRoundIcon,
 } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 import {
@@ -16,11 +15,12 @@ import {
   validateRole,
   hasFormErrors,
 } from "../../helper/RolesManagemtnValidator";
+import { createRole } from "../../services/RoleService";
 
 export const CreateRoleForm = ({ onRoleCreationSuccess, onClose }) => {
   const [Loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
-    name: "",
+    roleName: "",
   });
 
   const notify = ({ message, type = "info", duration }) => {
@@ -31,7 +31,7 @@ export const CreateRoleForm = ({ onRoleCreationSuccess, onClose }) => {
   };
 
   const [formErrors, setFormErrors] = useState({
-    name: "",
+    roleName: "",
   });
 
   const [error, setError] = useState("");
@@ -68,7 +68,7 @@ export const CreateRoleForm = ({ onRoleCreationSuccess, onClose }) => {
 
         localStorage.setItem("id", response.role.id);
         notify({
-          message: "Role Created Succenfully.",
+          message: "Role Created Successfully.",
           type: "success",
         });
       }
@@ -82,9 +82,8 @@ export const CreateRoleForm = ({ onRoleCreationSuccess, onClose }) => {
   };
 
   const getInputClasses = (fieldError) => {
-    if (fieldError) return "border-red-500 "; //Invalid
-    return "border-neutral-300 dark:border-neutral-700 "; //Neutral
-    if (fieldError === "") return "border-green-500 "; //Valid
+    if (fieldError) return "border-red-500"; // Invalid
+    return "border-neutral-300 dark:border-neutral-700"; // Neutral
   };
 
   return (
@@ -99,13 +98,13 @@ export const CreateRoleForm = ({ onRoleCreationSuccess, onClose }) => {
           className="p-1 hover:bg-yellow-200 dark:hover:bg-yellow-600 rounded w-fit"
         >
           <X size={16} className="text-yellow-500 hover:text-black " />
-        </button>{" "}
+        </button>
         <h3 className="text-[32px] mb-10 font-medium leading-[42px] text-center font-titles">
           Create a Role
         </h3>
         {/* Error Message */}
         {error && <p className="text-red-500 text-center">{error}</p>}
-        {/* Name Fields */}
+        {/* Name Field */}
         <div className="w-full">
           <label
             htmlFor="name"
@@ -114,25 +113,25 @@ export const CreateRoleForm = ({ onRoleCreationSuccess, onClose }) => {
             Role name
           </label>
           <div className="relative flex items-center mt-2">
-            <KeyRoundIcon
+            <KeyRound
               className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
               strokeWidth={2.75}
               size={20}
-            />{" "}
+            />
             <input
               type="text"
-              value={formData.name}
+              value={formData.roleName}
               onChange={handleChange}
-              name="name"
-              id="fname"
+              name="roleName"
+              id="roleName"
               className={`${getInputClasses(
-                formErrors.name
-              )} block h-[50px] w-full bg-gray-200 border  text-sm font-light pl-10 pr-2.5 py-0 rounded-[8px] dark:bg-[rgba(255,255,255,0.1)]`}
+                formErrors.roleName
+              )} block h-[50px] w-full bg-gray-200 border text-sm font-light pl-10 pr-2.5 py-0 rounded-[8px] dark:bg-[rgba(255,255,255,0.1)]`}
             />
           </div>
 
-          {formErrors.name && (
-            <span className="text-red-500">{formErrors.name}</span>
+          {formErrors.roleName && (
+            <span className="text-red-500">{formErrors.roleName}</span>
           )}
         </div>
         {/* Submit Button */}
