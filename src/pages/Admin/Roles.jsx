@@ -4,6 +4,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { PropagateLoader } from "react-spinners";
 import { getAllRoles, getAllPermissions } from "../../services/RoleService"; // Assume these are defined
 import { CreateRoleForm } from "../../components/Dashboard/CreateRoleModal";
+import { PermissionsModal } from "../../components/Dashboard/PermissionsModal";
 
 export const Roles = () => {
   const rolesTableHeader = [
@@ -11,9 +12,6 @@ export const Roles = () => {
     { label: "Permissions", fields: ["permissions"] },
   ];
 
-  const permissionsTableHeader = [
-    { label: "Permission Name", fields: ["name"] },
-  ];
 
   const [rolesTableData, setRolesTableData] = useState([]);
   const [permissionsTableData, setPermissionsTableData] = useState([]);
@@ -22,7 +20,7 @@ export const Roles = () => {
   const [roleCreation, setRoleCreation] = useState(0);
 
   const handleRoleCreationSuccess = () => {
-    setRoleCreation(1);
+    setRoleCreation(prev => prev + 1);
   };
 
   const notify = ({ message, type = "info", duration }) => {
@@ -133,7 +131,9 @@ export const Roles = () => {
                     onClose={() => setIsModalOpen(false)}
                   />
                 ) : (
-                  <p>Role Creation Form</p>
+                  <PermissionsModal onRoleCreationSuccess={handleRoleCreationSuccess}
+                    onClose={() => setIsModalOpen(false)}
+                  />
                 )}
               </div>
             </div>
