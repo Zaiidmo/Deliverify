@@ -1,0 +1,65 @@
+//src\components\ShoppingCart.jsx
+import React, { useState, useEffect } from 'react';
+
+const ShoppingCart = () => {
+  const [cartItems, setCartItems] = useState([]);
+
+  useEffect(() => {
+    // Récupérer les éléments du panier depuis le localStorage
+    const storedCartItems = localStorage.getItem('cart');
+    if (storedCartItems) {
+      setCartItems(JSON.parse(storedCartItems));
+    }
+  }, []);
+
+  return (
+    <div>
+      <h2>Shopping Cart</h2>
+      {cartItems.length > 0 ? (
+        <table>
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {cartItems.map((item, index) => (
+              <tr key={index}>
+                <td>{item.name}</td>
+                <td>{item.quantity}</td>
+                <td>${item.price.toFixed(2)}</td>
+                <td>${(item.price * item.quantity).toFixed(2)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <p>Your cart is empty.</p>
+      )}
+    </div>
+  );
+};
+
+export default ShoppingCart;
+
+more moderne with button checkout and delete item from cart 
+
+and button checkout send to this endpoit 
+
+http://localhost:3000/api/order/purchase
+
+data send exemple : 
+
+{
+    "items": [
+        {
+            "id": "67159f7bb7bb9cbc3396d726",
+            "quantity": 3
+        }
+    ]
+}
+
+

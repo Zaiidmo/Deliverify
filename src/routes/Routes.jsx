@@ -14,7 +14,10 @@ import { PrivateRoute, PublicRoute } from "../components/RouteGuards.jsx";
 import UserProfile from "../pages/Delivery/UserProfile.jsx";
 import { Dashboard } from "../pages/Admin/Dashboard.jsx";
 import { Restaurants } from "../pages/Admin/Restaurants.jsx";
+import AdminLogsPage from "../pages/Admin/AdminLogsPage.jsx";
+import UserLogsPage from "../pages/UserLogsPage.jsx";
 import { Users } from "../pages/Admin/Users.jsx";
+import RestaurantItems from "../pages/RestaurantItems.jsx";
 import { Roles } from "../pages/Admin/Roles.jsx";
 
 const AppRoutes = () => {
@@ -34,13 +37,16 @@ const AppRoutes = () => {
                 <Route path="forgot-password" element={<ForgotPassword />} />
                 <Route path="reset-password" element={<ResetPasswordForm />} />
                 <Route path="otp-login" element={<OTPLogin />} />
+               
               </Routes>
             </PublicRoute>
           }
         />
+         <Route path="/admin/logs" element={<AdminLogsPage />} />
+         <Route path="/user/logs" element={<UserLogsPage />} />
           <Route path="profile" element={<UserProfile />} />
- 
-        <Route index element={<App />} />
+          <Route path="/restaurants-items/:id" element={<RestaurantItems />} />
+          <Route index element={<App />} />
         {/* Private Routes */}
         <Route
           path="/dashboard/*"
