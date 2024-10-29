@@ -6,7 +6,7 @@ import {
   assignPermissionsToRole,
 } from "../../services/RoleService";
 
-export const AssignPermissionsModal = ({ onClose }) => {
+export const AssignPermissionsModal = ({ onClose, onSuccess }) => {
   const [permissions, setPermissions] = useState([]);
   const [selectedPermissions, setSelectedPermissions] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -74,6 +74,7 @@ export const AssignPermissionsModal = ({ onClose }) => {
         message: "Permissions assigned successfully!",
         type: "success",
       });
+      onSuccess();
       onClose();
     } catch (err) {
       setError("Failed to assign permissions");

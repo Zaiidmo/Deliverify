@@ -4,14 +4,13 @@ import toast, { Toaster } from "react-hot-toast";
 import { PropagateLoader } from "react-spinners";
 import { getAllRoles, getAllPermissions } from "../../services/RoleService"; // Assume these are defined
 import { CreateRoleForm } from "../../components/Dashboard/CreateRoleModal";
-import { AssignPermissionsModal} from "../../components/Dashboard/PermissionsModal";
+import { AssignPermissionsModal } from "../../components/Dashboard/PermissionsModal";
 
 export const Roles = () => {
   const rolesTableHeader = [
     { label: "Role", fields: ["name"] },
     { label: "Permissions", fields: ["permissions"] },
   ];
-
 
   const [rolesTableData, setRolesTableData] = useState([]);
   const [permissionsTableData, setPermissionsTableData] = useState([]);
@@ -20,7 +19,7 @@ export const Roles = () => {
   const [roleCreation, setRoleCreation] = useState(0);
 
   const handleRoleCreationSuccess = () => {
-    setRoleCreation(prev => prev + 1);
+    setRoleCreation((prev) => prev + 1);
   };
 
   const notify = ({ message, type = "info", duration }) => {
@@ -97,7 +96,7 @@ export const Roles = () => {
     };
 
     fetchData();
-  }, []);
+  }, [roleCreation]);
 
   return (
     <>
@@ -132,6 +131,7 @@ export const Roles = () => {
                   />
                 ) : (
                   <AssignPermissionsModal
+                    onSuccess={handleRoleCreationSuccess}
                     onClose={() => setIsModalOpen(false)}
                   />
                 )}
@@ -153,7 +153,9 @@ export const Roles = () => {
             {/* Permissions Table */}
             {permissionsTableData.length > 0 && (
               <div className="w-full bg-gray-400/40 dark:bg-gray-900 dark:text-white backdrop-blur-xl p-4 rounded-lg">
-              <h3 className="p-2 pl-0 capitalize text-left font-bold border-b-2 mb-2 border-gray-600">Permissions</h3>
+                <h3 className="p-2 pl-0 capitalize text-left font-bold border-b-2 mb-2 border-gray-600">
+                  Permissions
+                </h3>
                 <div className="flex flex-wrap gap-2">
                   {permissionsTableData.map((perm) => (
                     <span
