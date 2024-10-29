@@ -109,7 +109,6 @@ export const CreateUserForm = ({ onUserCreationSuccess, onClose }) => {
 
   return (
     <>
-      <Toaster />
       <form
         className="text-black text-left w-full flex flex-col dark:text-white max-w-screen-sm lg:max-w-screen-md bg-[rgba(255,255,255,0.13)] absolute -translate-x-2/4 -translate-y-2/4 backdrop-blur-[10px] shadow-[0_0_40px_rgba(8,7,16,0.6)] px-[35px] py-[50px] rounded-[10px] border-2 border-solid border-[rgba(255,255,255,0.1)] left-2/4 dark:bg-[rgba(0,0,0,0.5)]"
         onSubmit={handleRegister}

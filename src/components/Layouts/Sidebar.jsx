@@ -1,7 +1,7 @@
 import LogoutButton from "../Auth/LogoutButton";
 import { isAuthenticated } from "../RouteGuards";
 import { SidebarButton } from "./SidebarButton";
-import { ChefHat, DoorOpen, Home, LayoutDashboard, LogIn, LogOut, PersonStanding, Sandwich, Users } from "lucide-react";
+import { ChefHat, DoorOpen, Home, LayoutDashboard, LogIn, LogOut, Logs, PersonStanding, Sandwich, Users } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
 const Sidebar = () => {
@@ -68,6 +68,11 @@ const Sidebar = () => {
               label="Roles & Permissions"
               icon={<PersonStanding />}
               href={"dashboard/roles"}
+            />
+            <SidebarButton
+              label="Users Logs"
+              icon={<Logs />}
+              href={"dashboard/logs"}
             />
           </>
         )}

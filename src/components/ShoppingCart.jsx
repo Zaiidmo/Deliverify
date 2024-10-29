@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Trash } from 'lucide-react';
 import api from '../../axiosConfig';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 const ShoppingCart = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -58,13 +58,6 @@ const ShoppingCart = () => {
     }
   };
 
-  const notify = (message) => {
-    toast.success(message, {
-      duration: 4000,
-      position: 'top-center',
-    });
-  };
-
   return (
     <div className="p-4">
       <h2 className="text-xl font-bold mb-4">Shopping Cart</h2>
@@ -119,7 +112,6 @@ const ShoppingCart = () => {
           </button>
         </div>
       )}
-      <Toaster /> {/* Add Toaster component for notifications */}
     </div>
   );
 };

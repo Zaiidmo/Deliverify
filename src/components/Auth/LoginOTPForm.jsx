@@ -83,7 +83,6 @@ export const LoginOTPForm = () => {
 
   return (
     <>
-      <Toaster />
       {/* <ToastContainer position="top-right" autoClose={3000} /> */}
       <div className="relative h-screen flex justify-center items-center top-10">
         {/* Background with two shapes */}

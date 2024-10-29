@@ -32,6 +32,7 @@ export const Restaurants = () => {
     toast[type](message, {
       duration: duration || 4000,
       position: "bottom-right",
+      id: message,
     });
   };
 
@@ -39,12 +40,12 @@ export const Restaurants = () => {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
+      const token = localStorage.getItem("accessToken");
       notify({
         message: "Getting Restaurants Data ...",
         type: "loading",
         duration: 1000,
       });
-      const token = localStorage.getItem("accessToken");
 
       try {
         const response = await fetchAllRestaurants(token);
@@ -126,7 +127,6 @@ export const Restaurants = () => {
 
   return (
     <>
-      <Toaster />
       <div className="max-w-screen-xl mx-auto pt-24 text-center">
         <h1 className="text-3xl md:text-4xl lg:text-6xl font-macondo text-gray-900 dark:text-yellow-500 pb-8">
           Restaurants Management

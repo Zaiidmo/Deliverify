@@ -42,7 +42,6 @@ const AppRoutes = () => {
             </PublicRoute>
           }
         />
-         <Route path="/admin/logs" element={<AdminLogsPage />} />
          <Route path="/user/logs" element={<UserLogsPage />} />
           <Route path="profile" element={<UserProfile />} />
           <Route path="/restaurants-items/:id" element={<RestaurantItems />} />
@@ -57,6 +56,7 @@ const AppRoutes = () => {
                 <Route path="restaurants" element={<Restaurants />} />
                 <Route path="users" element={<Users />} />
                 <Route path="roles" element={<Roles />} />
+                <Route path="/logs" element={<AdminLogsPage />} />
               </Routes>
             </PrivateRoute>
           }
