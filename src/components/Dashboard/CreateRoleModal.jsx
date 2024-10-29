@@ -66,7 +66,7 @@ export const CreateRoleForm = ({ onRoleCreationSuccess, onClose }) => {
       if (response) {
         console.log(response);
 
-        localStorage.setItem("id", response.role.id);
+        localStorage.setItem("roleId", response.role._id);
         notify({
           message: "Role Created Successfully.",
           type: "success",

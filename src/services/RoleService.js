@@ -38,3 +38,19 @@ export const createRole = async (roleData, token) => {
     console.error("error creating role", err);
   }
 }
+
+export const assignPermissionsToRole = async (roleId, permissionIds, token) => {
+  try {
+    console.log("assigning permissions", roleId, permissionIds);
+    
+    const response = await apiClient.post(`/roles/assign-permissions`, {roleId, permissionIds}, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (err) {
+    console.error("error assigning permissions", err);
+    throw err;
+  }
+}
