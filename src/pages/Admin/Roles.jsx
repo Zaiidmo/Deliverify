@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { StatisticsTable } from "../../components/Dashboard/StatisticsTable";
 import toast, { Toaster } from "react-hot-toast";
 import { PropagateLoader } from "react-spinners";
-import { getAllRoles, getAllPermissions } from "../../services/RoleService"; // Assume these are defined
+import { getAllRoles, getAllPermissions, deleteRole } from "../../services/RoleService"; // Assume these are defined
 import { CreateRoleForm } from "../../components/Dashboard/CreateRoleModal";
 import { AssignPermissionsModal } from "../../components/Dashboard/PermissionsModal";
 
@@ -98,6 +98,45 @@ export const Roles = () => {
     fetchData();
   }, [roleCreation]);
 
+  const handleDeleteRole = async (roleId) => {
+    setLoading(true);
+    const token = localStorage.getItem("accessToken");
+  
+    try {
+      const response = await deleteRole(roleId, token);
+      console.log(response);
+      
+      if (response.status === 200) {
+        notify({
+          message: "Role deleted successfully.",
+          type: "success",
+        });
+        setRolesTableData((prevData) =>
+          prevData.filter((role) => role.id !== roleId)
+        );
+      } else if (response.status === 404) {
+        notify({
+          message: "Role not found.",
+          type: "error",
+        });
+      } else {
+        notify({
+          message: "Failed to delete the role.",
+          type: "error",
+        });
+      }
+    } catch (err) {
+      notify({
+        message: "Something went wrong... please try again later.",
+        type: "error",
+        duration: 3000,
+      });
+      console.error("Error deleting role", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+  
   return (
     <>
       <Toaster />
@@ -148,7 +187,12 @@ export const Roles = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mx-4">
             {/* Roles Table */}
             {rolesTableData.length > 0 && (
-              <StatisticsTable head={rolesTableHeader} data={rolesTableData} />
+              <StatisticsTable
+                head={rolesTableHeader}
+                data={rolesTableData}
+                showActions={true}
+                roleDelete={handleDeleteRole}
+              />
             )}
             {/* Permissions Table */}
             {permissionsTableData.length > 0 && (

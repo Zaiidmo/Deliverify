@@ -54,3 +54,17 @@ export const assignPermissionsToRole = async (roleId, permissionIds, token) => {
     throw err;
   }
 }
+
+export const deleteRole = async (roleId, token) => {
+  try {
+    const response = await apiClient.delete(`/roles/${roleId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response;
+  } catch (err) {
+    console.error("error deleting role", err);
+    return { status: err.response?.status || 500, error: err.message };
+  }
+}

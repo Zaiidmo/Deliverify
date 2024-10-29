@@ -9,6 +9,7 @@ export const StatisticsTable = ({
   onApprove,
   onDeny,
   onBanUser,
+  roleDelete,
   showActions = false, // Default to false if not specified
 }) => {
   return (
@@ -74,7 +75,7 @@ export const StatisticsTable = ({
               ))}
               {/* Render Actions Column Conditionally */}
               {showActions && (
-                <td className="p-2 pl-0">
+                <td className="p-2 pl-0 flex items-center justify-center gap-2 w-full h-full">
                   {onEdit && (
                     <button
                       onClick={() => onEdit(item)}
@@ -89,6 +90,17 @@ export const StatisticsTable = ({
                   {onDelete && item.isApprouved === "Yes" && (
                     <button
                       onClick={() => onDelete(item.id)}
+                      className="p-1 hover:bg-red-200 dark:hover:bg-red-600 rounded"
+                    >
+                      <Trash2
+                        size={16}
+                        className="text-red-500 dark:text-red-300"
+                      />
+                    </button>
+                  )}
+                  {roleDelete && (
+                    <button
+                      onClick={() => roleDelete(item.id)}
                       className="p-1 hover:bg-red-200 dark:hover:bg-red-600 rounded"
                     >
                       <Trash2
