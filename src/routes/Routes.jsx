@@ -15,6 +15,7 @@ import UserProfile from "../pages/Delivery/UserProfile.jsx";
 import { Dashboard } from "../pages/Admin/Dashboard.jsx";
 import { Restaurants } from "../pages/Admin/Restaurants.jsx";
 import { Users } from "../pages/Admin/Users.jsx";
+import RestaurantItems from "../pages/RestaurantItems.jsx";
 
 const AppRoutes = () => {
   return (
@@ -33,6 +34,7 @@ const AppRoutes = () => {
                 <Route path="forgot-password" element={<ForgotPassword />} />
                 <Route path="reset-password" element={<ResetPasswordForm />} />
                 <Route path="otp-login" element={<OTPLogin />} />
+                <Route path="Restaurant/items" element={<RestaurantItems />} />
               </Routes>
             </PublicRoute>
           }
