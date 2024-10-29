@@ -3,7 +3,7 @@ import { X } from "lucide-react";
 import toast from "react-hot-toast";
 import { getAllRoles, updateUserRole } from "../../services/RoleService";
 
-export const AssignRolesModal = ({ onClose, onSuccess }) => {
+export const AssignRolesModal = ({ user, onClose }) => {
   const [roles, setRoles] = useState([]);
   const [selectedRoles, setSelectedRoles] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -59,16 +59,14 @@ export const AssignRolesModal = ({ onClose, onSuccess }) => {
     }
     setLoading(true);
     try {
-      const userId = localStorage.getItem("userId");
-
       const token = localStorage.getItem("accessToken");
-      await updateUserRole(userId, selectedRoles, token);
+      await updateUserRole(user, selectedRoles, token);
       localStorage.removeItem("userId");
       notify({
         message: "Roles assigned successfully!",
         type: "success",
       });
-      onSuccess();
+      ;
       onClose();
     } catch (err) {
       setError("Failed to assign roles");
@@ -108,7 +106,7 @@ export const AssignRolesModal = ({ onClose, onSuccess }) => {
               </div>
               <button
                 onClick={handleAssignRoles}
-                className="w-full mt-4 bg-violet-500 dark:bg-yellow-500 text-white py-2 rounded-lg hover:bg-violet-600 dark:hover:bg-yellow-600 dark:text-black"
+                className="w-full mt-4 bg-violet-500 dark:bg-yellow-500 text-white py-2 rounded hover:bg-violet-600 dark:hover:bg-yellow-600 dark:*:"
                 disabled={loading}
               >
                 {loading ? "Assigning..." : "Assign Roles"}

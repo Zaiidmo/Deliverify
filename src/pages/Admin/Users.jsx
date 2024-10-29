@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { StatisticsTable } from "../../components/Dashboard/StatisticsTable";
 import { getAllUsers, banUser } from "../../services/UserService";
-import { updateUserRole } from "../../services/RoleService";
+import { updateUserRole } from "../../services/RoleService"; 
 import { Toaster, toast } from "react-hot-toast";
 import { PropagateLoader } from "react-spinners";
 import { AssignRolesModal } from "../../components/Dashboard/EditUserRoleModal";
@@ -20,10 +20,11 @@ export const Users = () => {
   const [selectedUser, setSelectedUser] = useState(null); 
   const [showRoleModal, setShowRoleModal] = useState(false);
 
-  const notify = ({ message, type = "info", duration }) => {
+  const notify = ({ message, type = "info", options }) => {
     toast[type](message, {
-      duration: duration || 4000,
+      duration: options?.duration || 4000,
       position: "bottom-right",
+      ...options,
     });
   };
 
@@ -39,7 +40,6 @@ export const Users = () => {
 
       try {
         const response = await getAllUsers(token);
-
         if (response) {
           const formattedData = response.data.map((user) => ({
             id: user._id,
@@ -60,24 +60,18 @@ export const Users = () => {
           }));
 
           setTableData(formattedData);
-          notify({
-            message: "All Users retrieved successfully.",
-            type: "success",
-          });
+          notify({ message: "All Users retrieved successfully.", type: "success" });
         }
       } catch (error) {
-        notify({
-          message: "Error fetching users data. Please try again.",
-          type: "error",
-        });
-        console.error("Error fetching users:", error);
+        const errorMessage = error.response?.data?.message || "Error fetching users data. Please try again.";
+        notify({ message: errorMessage, type: "error" });
       } finally {
         setLoading(false);
       }
     };
 
     fetchData();
-  }, []);
+  }, [showRoleModal]);
 
   const handleBanUser = async (userId) => {
     setLoading(true);
@@ -88,22 +82,13 @@ export const Users = () => {
       if (response && response.message === "User banned") {
         notify({ message: "User Banned.", type: "success" });
         setTableData((prevData) =>
-          prevData.map((user) =>
-            user.id === userId
-              ? { ...user, isBanned: "Yes" }
-              : user
-          )
+          prevData.map((user) => user.id === userId ? { ...user, isBanned: "Yes" } : user)
         );
       } else {
         notify({ message: "Failed to ban the user.", type: "error" });
       }
     } catch (err) {
-      notify({
-        message: "Error banning user. Please try again.",
-        type: "error",
-        duration: 3000,
-      });
-      console.error("Error banning user:", err);
+      notify({ message: "Error banning user. Please try again.", type: "error", duration: 3000 });
     } finally {
       setLoading(false);
     }
@@ -113,32 +98,25 @@ export const Users = () => {
     setSelectedUser(user);
     setShowRoleModal(true);
   };
+  
 
   const handleUpdateRoles = async (userId, roleIds) => {
     const token = localStorage.getItem("accessToken");
-
+    // const userId = selectedUser?._id;
+    
     try {
-      const response = await AssignRolesModal(userId, roleIds, token);
+      const response = await updateUserRole(userId, roleIds, token);
       if (response.message === "Roles assigned") {
         notify({ message: "Roles updated successfully.", type: "success" });
         setShowRoleModal(false);
         setTableData((prevData) =>
-          prevData.map((user) =>
-            user.id === userId
-              ? { ...user, roles: roleIds } 
-              : user
-          )
+          prevData.map((user) => user.id === userId ? { ...user, roles: roleIds } : user)
         );
       } else {
         notify({ message: "Failed to update roles.", type: "error" });
       }
     } catch (err) {
-      notify({
-        message: "Error updating roles. Please try again.",
-        type: "error",
-        duration: 3000,
-      });
-      console.error("Error updating user roles:", err);
+      notify({ message: "Error updating roles. Please try again.", type: "error", duration: 3000 });
     }
   };
 
@@ -168,7 +146,7 @@ export const Users = () => {
           </div>
         )}
 
-        {showRoleModal && (
+        {showRoleModal && selectedUser && (
           <AssignRolesModal
             user={selectedUser}
             onClose={() => setShowRoleModal(false)}

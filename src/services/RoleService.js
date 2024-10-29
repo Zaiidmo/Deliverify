@@ -75,15 +75,17 @@ export const deleteRole = async (roleId, token) => {
 
 export const updateUserRole = async (userId, roleIds, token) => {
   try {
-    const roleData = { userId, roleIds };
+    console.log("updating user role", userId);
+    
     const response = await apiClient.post(
       `/roles/assign-roles`,
+      { userId, roleIds },
       {
         method: "POST",
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(roleData),
       }
     );
     return response.data;
