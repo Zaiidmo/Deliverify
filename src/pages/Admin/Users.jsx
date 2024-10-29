@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { StatisticsTable } from "../../components/Dashboard/StatisticsTable";
 import { getAllUsers, banUser } from "../../services/UserService";
-import { updateUserRole } from "../../services/RoleService"; 
+import { updateUserRole } from "../../services/RoleService";
 import { Toaster, toast } from "react-hot-toast";
 import { PropagateLoader } from "react-spinners";
 import { AssignRolesModal } from "../../components/Dashboard/EditUserRoleModal";
@@ -17,7 +17,7 @@ export const Users = () => {
 
   const [tableData, setTableData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedUser, setSelectedUser] = useState(null); 
+  const [selectedUser, setSelectedUser] = useState(null);
   const [showRoleModal, setShowRoleModal] = useState(false);
 
   const notify = ({ message, type = "info", options }) => {
@@ -25,6 +25,7 @@ export const Users = () => {
       duration: options?.duration || 4000,
       position: "bottom-right",
       ...options,
+      id: message,
     });
   };
 
@@ -47,23 +48,34 @@ export const Users = () => {
             email: user.email || "N/A",
             phoneNumber: user.phoneNumber || "N/A",
             CIN: user.CIN || "N/A",
-            role: user.roles.length > 0 ? (
-              <div className="flex flex-wrap gap-2">
-                {user.roles.map((role) => (
-                  <span key={role.id} className="bg-yellow-500 text-black px-2 py-1 rounded">
-                    {role.name}
-                  </span>
-                ))}
-              </div>
-            ) : "N/A",
+            role:
+              user.roles.length > 0 ? (
+                <div className="flex flex-wrap gap-2">
+                  {user.roles.map((role) => (
+                    <span
+                      key={role.id}
+                      className="bg-yellow-500 text-black px-2 py-1 rounded"
+                    >
+                      {role.name}
+                    </span>
+                  ))}
+                </div>
+              ) : (
+                "N/A"
+              ),
             isBanned: user.isBanned ? "Yes" : "No",
           }));
 
           setTableData(formattedData);
-          notify({ message: "All Users retrieved successfully.", type: "success" });
+          notify({
+            message: "All Users retrieved successfully.",
+            type: "success",
+          });
         }
       } catch (error) {
-        const errorMessage = error.response?.data?.message || "Error fetching users data. Please try again.";
+        const errorMessage =
+          error.response?.data?.message ||
+          "Error fetching users data. Please try again.";
         notify({ message: errorMessage, type: "error" });
       } finally {
         setLoading(false);
@@ -76,19 +88,25 @@ export const Users = () => {
   const handleBanUser = async (userId) => {
     setLoading(true);
     const token = localStorage.getItem("accessToken");
-  
+
     try {
       const response = await banUser(userId, token);
       if (response && response.message === "User banned") {
         notify({ message: "User Banned.", type: "success" });
         setTableData((prevData) =>
-          prevData.map((user) => user.id === userId ? { ...user, isBanned: "Yes" } : user)
+          prevData.map((user) =>
+            user.id === userId ? { ...user, isBanned: "Yes" } : user
+          )
         );
       } else {
         notify({ message: "Failed to ban the user.", type: "error" });
       }
     } catch (err) {
-      notify({ message: "Error banning user. Please try again.", type: "error", duration: 3000 });
+      notify({
+        message: "Error banning user. Please try again.",
+        type: "error",
+        duration: 3000,
+      });
     } finally {
       setLoading(false);
     }
@@ -98,31 +116,35 @@ export const Users = () => {
     setSelectedUser(user);
     setShowRoleModal(true);
   };
-  
 
   const handleUpdateRoles = async (userId, roleIds) => {
     const token = localStorage.getItem("accessToken");
     // const userId = selectedUser?._id;
-    
+
     try {
       const response = await updateUserRole(userId, roleIds, token);
       if (response.message === "Roles assigned") {
         notify({ message: "Roles updated successfully.", type: "success" });
         setShowRoleModal(false);
         setTableData((prevData) =>
-          prevData.map((user) => user.id === userId ? { ...user, roles: roleIds } : user)
+          prevData.map((user) =>
+            user.id === userId ? { ...user, roles: roleIds } : user
+          )
         );
       } else {
         notify({ message: "Failed to update roles.", type: "error" });
       }
     } catch (err) {
-      notify({ message: "Error updating roles. Please try again.", type: "error", duration: 3000 });
+      notify({
+        message: "Error updating roles. Please try again.",
+        type: "error",
+        duration: 3000,
+      });
     }
   };
 
   return (
     <>
-      <Toaster />
       <div className="max-w-screen-xl mx-auto pt-24 text-center">
         <h1 className="text-3xl md:text-4xl lg:text-6xl font-macondo text-gray-900 dark:text-yellow-500 pb-8">
           Users Management
@@ -137,13 +159,11 @@ export const Users = () => {
             head={tableHeader}
             data={tableData}
             showActions={true}
-            onBanUser={handleBanUser} 
+            onBanUser={handleBanUser}
             onUpdateRole={handleEditUserRole}
           />
         ) : (
-          <div className="py-8 text-gray-500">
-            No users found.
-          </div>
+          <div className="py-8 text-gray-500">No users found.</div>
         )}
 
         {showRoleModal && selectedUser && (

@@ -177,7 +177,6 @@ const RestaurantItems = () => {
         ))}
       </div>
 
-      <Toaster />
     </div>
   );
 };

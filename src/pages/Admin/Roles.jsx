@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import { StatisticsTable } from "../../components/Dashboard/StatisticsTable";
 import toast, { Toaster } from "react-hot-toast";
 import { PropagateLoader } from "react-spinners";
-import { getAllRoles, getAllPermissions, deleteRole } from "../../services/RoleService"; // Assume these are defined
+import {
+  getAllRoles,
+  getAllPermissions,
+  deleteRole,
+} from "../../services/RoleService"; // Assume these are defined
 import { CreateRoleForm } from "../../components/Dashboard/CreateRoleModal";
 import { AssignPermissionsModal } from "../../components/Dashboard/PermissionsModal";
 
@@ -26,6 +30,7 @@ export const Roles = () => {
     toast[type](message, {
       duration: duration || 4000,
       position: "bottom-right",
+      id: message,
     });
   };
 
@@ -37,6 +42,7 @@ export const Roles = () => {
         message: "Fetching Roles and Permissions Data ...",
         type: "loading",
         duration: 1000,
+        id: "fetching-data",
       });
       const token = localStorage.getItem("accessToken");
 
@@ -68,6 +74,7 @@ export const Roles = () => {
           notify({
             message: "Roles retrieved successfully.",
             type: "success",
+            id: "roles-success",
           });
         }
 
@@ -82,12 +89,14 @@ export const Roles = () => {
           notify({
             message: "Permissions retrieved successfully.",
             type: "success",
+            id: "permissions-success",
           });
         }
       } catch (error) {
         notify({
           message: "Something went wrong",
           type: "error",
+          id: "fetch-errors",
         });
         console.error("Error fetching data:", error);
       } finally {
@@ -101,15 +110,16 @@ export const Roles = () => {
   const handleDeleteRole = async (roleId) => {
     setLoading(true);
     const token = localStorage.getItem("accessToken");
-  
+
     try {
       const response = await deleteRole(roleId, token);
       console.log(response);
-      
+
       if (response.status === 200) {
         notify({
           message: "Role deleted successfully.",
           type: "success",
+          id: `delete-success-${roleId}`,
         });
         setRolesTableData((prevData) =>
           prevData.filter((role) => role.id !== roleId)
@@ -118,11 +128,13 @@ export const Roles = () => {
         notify({
           message: "Role not found.",
           type: "error",
+          id: `delete-not-found-${roleId}`,
         });
       } else {
         notify({
           message: "Failed to delete the role.",
           type: "error",
+          id: `delete-failure-${roleId}`,
         });
       }
     } catch (err) {
@@ -130,16 +142,16 @@ export const Roles = () => {
         message: "Something went wrong... please try again later.",
         type: "error",
         duration: 3000,
+          id: `delete-erros-${roleId}`
       });
       console.error("Error deleting role", err);
     } finally {
       setLoading(false);
     }
   };
-  
+
   return (
     <>
-      <Toaster />
       <div className="max-w-screen-xl mx-auto pt-24 text-center">
         <h1 className="text-3xl md:text-4xl lg:text-6xl font-macondo text-gray-900 dark:text-yellow-500 pb-8">
           Roles & Permissions
