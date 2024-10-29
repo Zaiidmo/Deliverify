@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { createManager } from "../../services/AuthService";
 import {
   validateField,
@@ -7,7 +7,6 @@ import {
 } from "../../helper/AuthFormValidator";
 import { User, Phone, KeyRound, Eye, EyeOff, Mail, X, IdCard } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
-import { Modal } from "react-modal";
 
 export const CreateUserForm = ({ onUserCreationSuccess, onClose }) => {
   const [showPassword, setShowPassword] = useState(false);

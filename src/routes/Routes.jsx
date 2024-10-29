@@ -18,6 +18,7 @@ import AdminLogsPage from "../pages/Admin/AdminLogsPage.jsx";
 import UserLogsPage from "../pages/UserLogsPage.jsx";
 import { Users } from "../pages/Admin/Users.jsx";
 import RestaurantItems from "../pages/RestaurantItems.jsx";
+import { Roles } from "../pages/Admin/Roles.jsx";
 
 const AppRoutes = () => {
   return (
@@ -55,6 +56,7 @@ const AppRoutes = () => {
                 <Route path="/" element={<Dashboard />} />
                 <Route path="restaurants" element={<Restaurants />} />
                 <Route path="users" element={<Users />} />
+                <Route path="roles" element={<Roles />} />
               </Routes>
             </PrivateRoute>
           }
