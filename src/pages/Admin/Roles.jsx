@@ -53,7 +53,7 @@ export const Roles = () => {
                 {role.permissions.map((perm) => (
                   <span
                     key={perm.id}
-                    className="dark:bg-yellow-500 bg-violet-500 text-black px-1 py-0.5 rounded"
+                    className="dark:bg-yellow-500 text-white bg-violet-500 dark:text-black px-1 py-0.5 rounded"
                   >
                     {perm.name}
                   </span>
@@ -204,7 +204,7 @@ export const Roles = () => {
                   {permissionsTableData.map((perm) => (
                     <span
                       key={perm.id}
-                      className="dark:bg-yellow-500 bg-violet-500 text-black text-xs px-1 h-fit py-0.5 rounded"
+                      className="dark:bg-yellow-500 bg-violet-500 text-white dark:text-black text-xs px-1 h-fit py-0.5 rounded overflow-y-auto"
                     >
                       {perm.name}
                     </span>
