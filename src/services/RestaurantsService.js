@@ -31,19 +31,53 @@ export const acceptRestaurant = async (restaurantId, token) => {
     throw err;
   }
 };
+export const createRestaurantWithItems = async (token, formData) => {
+  // const formData = {
+  //   name: "haja",
+  //   address: "tmme ",
+  //   phoneNumber: 2132133132,
+  //   owner: "6717d2d2184066d54ae9cf11",
+  //   location: {
+  //     type: "Point",
+  //     coordinates: [2.3232, 48.3525],
+  //   },
+  //   closeAt: "22:00",
+  //   openAt: "08:00",
+  //   category: {
+  //     name: "sdgs",
+  //     description: "dsgsdgdg",
+  //   },
+  //   isApprouved: true,
+  //   items: [
+  //     {
+  //       name: "Casey Rowe",
+  //       price: "318",
+  //       description: "Quos ut reprehenderi",
+  //       category: "balls",
+  //     },
+  //     {
+  //       name: "Virginia Sharp",
+  //       price: "548",
+  //       description: "Eos exercitationem i",
+  //       category: "gutts",
+  //     },
+  //   ],
+  // };
 
-export const createRestarantWithItems =async (token, items, ...restaurant) => {
   try {
-    const response = await apiClient.post("/restaurants/create-restaurant-with-items", {items, ...restaurant}, 
+    console.log("token", `Bearer ${token}`);
+    const response = await apiClient.post(
+      "/restaurants/create-restaurant-with-items",
+      formData,
       {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    console.log("response: ", response);
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     return response;
   } catch (err) {
-    conspole.error("Error creating restaurant", err);
+    console.error("Error creating restaurant", err);
     throw err;
   }
-}
+};

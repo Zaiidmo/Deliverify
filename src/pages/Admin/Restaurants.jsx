@@ -146,7 +146,7 @@ export const Restaurants = () => {
                   onKeyUp={handleSearch}
                   type="text"
                   id="simple-search"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Search restaurant name..."
                   required
                 />
@@ -162,7 +162,7 @@ export const Restaurants = () => {
 
           {isModalOpen && (
             <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 backdrop-blur">
-              <div className="bg-white rounded-lg p-8 w-11/12 max-w-md shadow-lg">
+              <div className="rounded-lg p-8 w-11/12 max-w-md shadow-lg">
                 <button
                   onClick={() => setIsModalOpen(false)}
                   className="absolute top-12 right-2"
