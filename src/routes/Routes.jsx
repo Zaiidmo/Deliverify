@@ -56,7 +56,7 @@ const AppRoutes = () => {
                 <Route path="restaurants" element={<Restaurants />} />
                 <Route path="users" element={<Users />} />
                 <Route path="roles" element={<Roles />} />
-                <Route path="/logs" element={<AdminLogsPage />} />
+                <Route path="logs" element={<AdminLogsPage />} />
               </Routes>
             </PrivateRoute>
           }

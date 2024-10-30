@@ -84,7 +84,7 @@ const Sidebar = () => {
               <SidebarButton
                 label="System Logs"
                 icon={<ScrollText />}
-                href={"admin/logs"}
+                href={"dashboard/logs"}
               />
             )}
           </>

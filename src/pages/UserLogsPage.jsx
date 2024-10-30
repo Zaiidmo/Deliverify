@@ -22,8 +22,10 @@ const UserLogsPage = () => {
     setError(null);
     try {
       const response = await api.post('/logs/myLogs', filters);
-      setLogs(response.data.data.logs);
+      
+      setLogs(response.data.data);
       const total = response.data.data.total;
+      console.log("response", total);
       setTotalPages(Math.ceil(total / filters.limit));
     } catch (error) {
       console.error("Error fetching logs:", error);
