@@ -17,6 +17,7 @@ import UserProfile from "../pages/Delivery/UserProfile.jsx";
 import { Dashboard } from "../pages/Admin/Dashboard.jsx";
 import { Restaurants } from "../pages/Admin/Restaurants.jsx";
 import { Users } from "../pages/Admin/Users.jsx";
+import UpdateRestaurant from "../components/Restaurant/UpdateRestaurant.jsx";
 
 const AppRoutes = () => {
   return (
@@ -51,7 +52,7 @@ const AppRoutes = () => {
                 <Route path="/" element={<Dashboard />} />
                 <Route path="restaurants" element={<Restaurants />} />
                 <Route path="users" element={<Users />} />
-                <Route path="dashboard"element={<RestoManager />}/>
+                <Route path="manager"element={<RestoManager />}/>
               </Routes>
             </PrivateRoute>
           }
@@ -67,14 +68,19 @@ const AppRoutes = () => {
         />
 
         
-        <Route
-          path="manager/add-restaurant"
-          element={
-           
-              <AddRestaurant />
-           
-          }
-        />
+<Route
+  path="manager/add-restaurant"
+  element={
+    <PrivateRoute>
+      <AddRestaurant />
+    </PrivateRoute>
+  }
+/>
+<Route path="/update-restaurant/:id" element={
+  <PrivateRoute>
+    <UpdateRestaurant />
+  </PrivateRoute>
+} />
         {/* <Route
           path="user-profile"
           element={

@@ -1,7 +1,7 @@
 import LogoutButton from "../Auth/LogoutButton";
 import { isAuthenticated } from "../RouteGuards";
 import { SidebarButton } from "./SidebarButton";
-import { ChefHat, DoorOpen, Home, LayoutDashboard, LogIn, LogOut, Sandwich, Users } from "lucide-react";
+import { ChefHat, DoorOpen, Home, LayoutDashboard, List, LogIn, LogOut, Sandwich, Users } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
 const Sidebar = () => {
@@ -38,7 +38,7 @@ const Sidebar = () => {
         <SidebarButton
               label="Resto Manager"
               icon={<List />}
-              href={"dashboard"}
+              href={"dashboard/manager"}
             />
         {/* <SidebarButton label="Ajouter Restaurant" icon={<PlusSquare />} href={"/dashboard"} /> */}
       

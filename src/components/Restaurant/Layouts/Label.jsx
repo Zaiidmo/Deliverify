@@ -9,4 +9,4 @@ const Label = ({ htmlFor, children }) => {
   );
 };
 
-export default Label; // Assurez-vous d'exporter le composant
+export default Label;

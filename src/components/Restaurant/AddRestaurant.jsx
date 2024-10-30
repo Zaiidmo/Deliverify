@@ -7,6 +7,10 @@ import Button from '../../components/Restaurant/Layouts/Button';
 import FormInput from '../../components/Restaurant/Layouts/FormInput';
 import Alert from '../../components/ui/Alert';
 import { AlertCircle } from 'lucide-react';
+import { createRestaurant } from '../../services/restaurantService';
+import toast, { Toaster } from "react-hot-toast";
+
+
 
 const AddRestaurant = ({ onSuccess }) => {
   const [loading, setLoading] = useState(false);
@@ -27,6 +31,23 @@ const AddRestaurant = ({ onSuccess }) => {
     cover: null,
     images: []
   });
+  const [previewUrls, setPreviewUrls] = useState({
+    logo: null,
+    cover: null,
+    images: [],
+  });
+  
+
+
+  const notify = ({ message, type = "info", duration }) => {
+    toast[type](message, {
+      duration: duration || 4000,
+      position: "bottom-right",
+    });
+  };
+
+
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -46,10 +67,27 @@ const AddRestaurant = ({ onSuccess }) => {
 
   const handleFileChange = (e) => {
     const { name, files } = e.target;
+    const newFiles = files.length > 0 ? (name === 'images' ? Array.from(files) : files[0]) : null;
+    
     setFormData((prev) => ({
       ...prev,
-      [name]: name === 'images' ? Array.from(files) : files[0],
+      [name]: newFiles,
     }));
+  
+    // Prévisualisation
+    if (newFiles) {
+      if (name === 'images') {
+        setPreviewUrls((prev) => ({
+          ...prev,
+          images: Array.from(files).map((file) => URL.createObjectURL(file)),
+        }));
+      } else {
+        setPreviewUrls((prev) => ({
+          ...prev,
+          [name]: URL.createObjectURL(newFiles),
+        }));
+      }
+    }
   };
 
   const validateForm = () => {
@@ -61,41 +99,88 @@ const AddRestaurant = ({ onSuccess }) => {
     if (!formData.closeAt) errors.push("L'heure de fermeture est requise");
     if (!formData.category.name) errors.push('Le nom de la catégorie est requis');
     if (!formData.category.description) errors.push('La description de la catégorie est requise');
-    if (!formData.latitude || !formData.longitude) errors.push('Les coordonnées de localisation sont requises');
-
+    if (!formData.latitude || isNaN(parseFloat(formData.latitude))) {
+      errors.push('La latitude est requise et doit être un nombre valide.');
+    }
+    if (!formData.longitude || isNaN(parseFloat(formData.longitude))) {
+      errors.push('La longitude est requise et doit être un nombre valide.');
+    }
+    
+  
     return errors;
   };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
+    
     const errors = validateForm();
     if (errors.length > 0) {
       setError(errors.join(', '));
       return;
     }
-    setLoading(true);
 
-    const dataToSubmit = {
-        ...formData,
-        location: {
-          type: "Point",
-          coordinates: [parseFloat(formData.longitude), parseFloat(formData.latitude)],
-        },
-      };
+    // if (isSubmitted) {
+    //   return; 
+    // }
     
+    setLoading(true);
+    const dataToSubmit = new FormData();
+  
+   
+    dataToSubmit.append('name', formData.name);
+    dataToSubmit.append('address', formData.address);
+    dataToSubmit.append('phoneNumber', formData.phoneNumber);
+    dataToSubmit.append('openAt', formData.openAt);
+    dataToSubmit.append('closeAt', formData.closeAt);
+    dataToSubmit.append('location[type]', 'Point');
+    dataToSubmit.append('location[coordinates][]', parseFloat(formData.longitude));
+    dataToSubmit.append('location[coordinates][]', parseFloat(formData.latitude));
+    dataToSubmit.append('category[name]', formData.category.name);
+    dataToSubmit.append('category[description]', formData.category.description);
+  
+   
+    if (formData.logo) {
+      dataToSubmit.append('logo', formData.logo);
+    }
+    if (formData.cover) {
+      dataToSubmit.append('cover', formData.cover);
+    }
+    if (formData.images && formData.images.length > 0) {
+      formData.images.forEach((image) => {
+        dataToSubmit.append('images', image);
+      });
+    }
+
+    console.log("Données soumises : ", dataToSubmit);
+  
     try {
-    await onSuccess(dataToSubmit); 
-  } catch (err) {
-    setError(err.message);
-  } finally {
-    setLoading(false);
-  }
+     const response = await createRestaurant(dataToSubmit);
+      console.log("Response from server:", response);
+      // setIsSubmitted(true);
+      // onSuccess(dataToSubmit);
+      notify({
+        message: " Restaurant create with succe",
+        type: "loading",
+        duration: 1000,
+      });
+
+      onSuccess(response);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
 };
+  
+  
+  
 
   return (
     <Card className="w-full max-w-2xl mx-auto">
       <CardHeader>
+      <Toaster />
         <CardTitle>Ajouter un nouveau restaurant</CardTitle>
       </CardHeader>
       <CardContent>
@@ -211,9 +296,34 @@ const AddRestaurant = ({ onSuccess }) => {
             multiple
             onChange={handleFileChange}
           />
-          <Button type="submit" loading={loading}>
-            Ajouter le restaurant
-          </Button>
+
+      
+{previewUrls.logo && (
+  <div className="my-4">
+    <h4>Prévisualisation du logo</h4>
+    <img src={previewUrls.logo} alt="Logo Preview" className="h-32 object-cover" />
+  </div>
+)}
+{previewUrls.cover && (
+  <div className="my-4">
+    <h4>Prévisualisation de l'image de couverture</h4>
+    <img src={previewUrls.cover} alt="Cover Preview" className="h-32 object-cover" />
+  </div>
+)}
+{previewUrls.images.length > 0 && (
+  <div className="my-4">
+    <h4>Prévisualisation des images additionnelles</h4>
+    <div className="grid grid-cols-3 gap-4">
+      {previewUrls.images.map((url, index) => (
+        <img key={index} src={url} alt={`Image Preview ${index}`} className="h-32 object-cover" />
+      ))}
+    </div>
+  </div>
+)}
+
+<Button type="submit" loading={loading} disabled={loading}>
+  Ajouter le restaurant
+</Button>
         </form>
       </CardContent>
     </Card>

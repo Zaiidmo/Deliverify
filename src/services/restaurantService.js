@@ -1,16 +1,14 @@
 // src/services/restaurantService.js
 import axios from "axios";
 
-// Function to retrieve token from local storage
+
 const getToken = () => {
   return localStorage.getItem("accessToken");
 };
 
 const apiClient = axios.create({
   baseURL: "http://localhost:3000/api/restaurants",
-  headers: {
-    "Content-Type": "application/json",
-  },
+ 
   withCredentials: true,
 });
 
@@ -48,7 +46,11 @@ const handleError = (error) => {
 
 export const createRestaurant = async (restaurantData) => {
   try {
-    const response = await apiClient.post("/create", restaurantData);
+   const response = await apiClient.post("/create", restaurantData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
     return handleResponse(response);
   } catch (error) {
     handleError(error);
@@ -74,15 +76,20 @@ export const getRestaurantById = async (id) => {
   }
 };
 
-export const updateRestaurantById = async (id, updateData) => {
+export const updateRestaurantById = async (id, updatedData, token) => {
   try {
-    const response = await apiClient.put(`/${id}`, updateData);
-    return handleResponse(response);
-  } catch (error) {
-    handleError(error);
+    const response = await apiClient.put(`/restaurants/${id}`, updatedData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+    return response.data;
+  } catch (err) {
+    console.error("Erreur lors de la mise à jour du restaurant :", err);
+    throw err;
   }
 };
-
 export const softDeleteRestaurant = async (id) => {
   try {
     const response = await apiClient.delete(`/${id}`);
