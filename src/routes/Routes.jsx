@@ -11,6 +11,8 @@ import OTPLogin from "../pages/Auth/LoginOTP.jsx";
 import Layout from "../pages/Layout.jsx";
 import { EmailVerification } from "../components/Auth/EmailVerification.jsx";
 import { PrivateRoute, PublicRoute } from "../components/RouteGuards.jsx";
+import RestoManager from "../pages/Restaurants/RestoManager.jsx";
+import AddRestaurant from "../components/Restaurant/AddRestaurant.jsx";
 import UserProfile from "../pages/Delivery/UserProfile.jsx";
 import { Dashboard } from "../pages/Admin/Dashboard.jsx";
 import { Restaurants } from "../pages/Admin/Restaurants.jsx";
@@ -19,6 +21,7 @@ import UserLogsPage from "../pages/UserLogsPage.jsx";
 import { Users } from "../pages/Admin/Users.jsx";
 import RestaurantItems from "../pages/RestaurantItems.jsx";
 import { Roles } from "../pages/Admin/Roles.jsx";
+import UpdateRestaurant from "../components/Restaurant/UpdateRestaurant.jsx";
 
 const AppRoutes = () => {
   return (
@@ -57,6 +60,7 @@ const AppRoutes = () => {
                 <Route path="users" element={<Users />} />
                 <Route path="roles" element={<Roles />} />
                 <Route path="logs" element={<AdminLogsPage />} />
+                <Route path="manager"element={<RestoManager />}/>
               </Routes>
             </PrivateRoute>
           }
@@ -70,6 +74,21 @@ const AppRoutes = () => {
             </PrivateRoute>
           }
         />
+
+        
+<Route
+  path="manager/add-restaurant"
+  element={
+    <PrivateRoute>
+      <AddRestaurant />
+    </PrivateRoute>
+  }
+/>
+<Route path="/update-restaurant/:id" element={
+  <PrivateRoute>
+    <UpdateRestaurant />
+  </PrivateRoute>
+} />
         {/* <Route
           path="user-profile"
           element={
@@ -79,6 +98,7 @@ const AppRoutes = () => {
           }
         /> */}
       </Route>
+      
     </Routes>
   );
 };

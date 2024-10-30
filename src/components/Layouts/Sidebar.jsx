@@ -37,6 +37,13 @@ const Sidebar = () => {
 
         {/* Sidebar Menu Items */}
         <SidebarButton label="Home" icon={<Home />} href={"/"} />
+        <SidebarButton
+              label="Resto Manager"
+              icon={<List />}
+              href={"dashboard/manager"}
+            />
+        {/* <SidebarButton label="Ajouter Restaurant" icon={<PlusSquare />} href={"/dashboard"} /> */}
+      
         {!isAuth ? (
           <SidebarButton
             label="GetStarted"
