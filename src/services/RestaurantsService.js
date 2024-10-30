@@ -31,3 +31,19 @@ export const acceptRestaurant = async (restaurantId, token) => {
     throw err;
   }
 };
+
+export const createRestarantWithItems =async (token, items, ...restaurant) => {
+  try {
+    const response = await apiClient.post("/restaurants/create-restaurant-with-items", {items, ...restaurant}, 
+      {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log("response: ", response);
+    return response;
+  } catch (err) {
+    conspole.error("Error creating restaurant", err);
+    throw err;
+  }
+}

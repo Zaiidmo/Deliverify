@@ -170,14 +170,14 @@ export const Restaurants = () => {
                   X
                 </button>
                 {/* Your form component goes here */}
-                {restaurantCreation === 0 ? (
+                {restaurantCreation !== 0 ? (
                   <CreateUserForm
                     onUserCreationSuccess={handleUserCreationSuccess}
                     onClose={() => setIsModalOpen(false)}
                   />
                 ) : (
-                  <p>Restaurant Creation Form</p>
-                )}
+                  <CreateRestaurantForm onClose={() => setIsModalOpen(false)}/>
+                                )}
               </div>
             </div>
           )}

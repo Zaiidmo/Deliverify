@@ -109,7 +109,7 @@ const RestaurantItems = () => {
   if (items.length === 0) return <EmptyState />;
 
   return (
-    <div className="px-10 mx-auto px-4 py-8 dark:bg-gray-900">
+    <div className="mx-auto px-4 py-8 dark:bg-gray-900">
       <h1 className="text-3xl text-center pt-20 md:text-4xl lg:text-6xl font-macondo text-gray-900 dark:text-yellow-500 pb-8">
         Restaurant Menu
       </h1>
