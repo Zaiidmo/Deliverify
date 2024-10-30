@@ -11,8 +11,8 @@ import {
   PersonStanding, 
   Sandwich, 
   Users,
-  ClipboardList, // For logs icon
-  ScrollText // For admin logs icon
+  ClipboardList, 
+  ScrollText 
 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
