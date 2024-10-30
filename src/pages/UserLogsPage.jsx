@@ -56,13 +56,14 @@ const UserLogsPage = () => {
         </h1>
         
         <div className="mb-6">
-          <label className="block text-lg font-medium mb-2">Filter by Action</label>
+          <label className="block text-lg  font-medium mb-2">Filter by Action</label>
           <select
             name="action"
             value={filters.action}
             onChange={handleFilterChange}
             className="w-full p-3 border rounded-md shadow-sm focus:ring focus:ring-blue-200 border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-700"
           >
+      <option value="">All</option>
       <option value="USER_LOGIN">USER_LOGIN</option>
       <option value="CREATE_USER">CREATE_USER</option>
       <option value="USER_VERIFY_OTP">USER_VERIFY_OTP</option>

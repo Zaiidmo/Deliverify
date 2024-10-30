@@ -106,7 +106,7 @@ export function Home() {
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
         {/* Top Banner */}
         <div className="bg-orange-500 text-white py-2 text-center">
-          <p>Free delivery on orders over $30! Use code: FREEDEL</p>
+          <p>Free delivery on orders over $30! Use code: MernOPS#12000</p>
         </div>
 
         {/* Hero Section */}
