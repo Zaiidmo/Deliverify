@@ -47,3 +47,17 @@ export const banUser = async (userId, token) => {
     throw error;
   }
 };
+
+export const getUserOrders = async (userId, token) => {
+  try {
+    const response = await apiClient.get(`/seller/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}

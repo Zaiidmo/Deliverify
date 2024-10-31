@@ -12,7 +12,8 @@ import {
   Sandwich, 
   Users,
   ClipboardList, 
-  ScrollText 
+  ScrollText, 
+  LucideListOrdered
 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
@@ -69,6 +70,11 @@ const Sidebar = () => {
             <SidebarButton
               label="Roles & Permissions"
               icon={<PersonStanding />}
+              href={"dashboard/roles"}
+            />
+            <SidebarButton
+              label="Client's Orders"
+              icon={<LucideListOrdered />}
               href={"dashboard/roles"}
             />
             

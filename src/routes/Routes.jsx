@@ -19,6 +19,7 @@ import UserLogsPage from "../pages/UserLogsPage.jsx";
 import { Users } from "../pages/Admin/Users.jsx";
 import RestaurantItems from "../pages/RestaurantItems.jsx";
 import { Roles } from "../pages/Admin/Roles.jsx";
+import { ListClientOrders } from "../components/Dashboard/ListClientOrders.jsx";
 
 const AppRoutes = () => {
   return (
@@ -37,15 +38,14 @@ const AppRoutes = () => {
                 <Route path="forgot-password" element={<ForgotPassword />} />
                 <Route path="reset-password" element={<ResetPasswordForm />} />
                 <Route path="otp-login" element={<OTPLogin />} />
-               
               </Routes>
             </PublicRoute>
           }
         />
-         <Route path="/user/logs" element={<UserLogsPage />} />
-          <Route path="profile" element={<UserProfile />} />
-          <Route path="/restaurants-items/:id" element={<RestaurantItems />} />
-          <Route index element={<App />} />
+        <Route path="/user/logs" element={<UserLogsPage />} />
+        <Route path="profile" element={<UserProfile />} />
+        <Route path="/restaurants-items/:id" element={<RestaurantItems />} />
+        <Route index element={<App />} />
         {/* Private Routes */}
         <Route
           path="/dashboard/*"
@@ -57,6 +57,17 @@ const AppRoutes = () => {
                 <Route path="users" element={<Users />} />
                 <Route path="roles" element={<Roles />} />
                 <Route path="logs" element={<AdminLogsPage />} />
+              </Routes>
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/seller/*"
+          element={
+            <PrivateRoute>
+              <Routes>
+                <Route path="/:id" element={<ListClientOrders />} />
               </Routes>
             </PrivateRoute>
           }
