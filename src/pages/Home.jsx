@@ -102,8 +102,8 @@ export function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-24">
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-50  dark:bg-gray-900 p-24">
+      <div className="min-h-screen w-[100vw]  bg-gray-50 dark:bg-gray-900">
         {/* Top Banner */}
         <div className="bg-orange-500 text-white py-2 text-center">
           <p>Free delivery on orders over $30! Use code: MernOPS#12000</p>
@@ -164,7 +164,7 @@ export function Home() {
         </div>
 
         {/* Quick Categories */}
-        <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="max-w-screen-2xl mx-auto px-4 py-8">
           <div className="flex gap-4 overflow-x-auto pb-4">
             {cuisineCategories.map((cuisine) => (
               <button
@@ -184,7 +184,7 @@ export function Home() {
         </div>
 
         {/* Search and Filter Section */}
-        <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="max-w-screen-2xl mx-auto px-4 py-8">
           <div className="flex gap-4">
             <div className="relative flex-1">
               <input
@@ -209,26 +209,25 @@ export function Home() {
         </div>
 
         {/* Trending Now Section */}
-        <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="max-w-screen-2xl mx-auto px-4 py-8">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold">Trending Now</h2>
-            <span className="text-orange-500">📈</span>
+            <h2 className="text-2xl dark:text-white font-bold">Trending Now</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredItems
               .filter((item) => item.isPopular)
               .map((item) => (
                 <div
                   key={item.id}
-                  className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow"
+                  className="bg-white dark:bg-gray-800 border border-yellow-400 dark:text-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow"
                 >
                   <div className="relative">
                     <img
                       src={item.image}
                       alt={item.name}
-                      className="w-full h-48 object-cover"
+                      className="w-full h-1/2 object-cover"
                     />
-                    <button className="absolute top-4 right-4 p-2 bg-white rounded-full shadow-md hover:bg-gray-100">
+                    <button className="absolute p-2 top-4 right-4 bg-white rounded-full shadow-md hover:bg-gray-100">
                       <span className="text-gray-400 hover:text-red-500">
                         ❤️
                       </span>
@@ -236,7 +235,7 @@ export function Home() {
                   </div>
                   <div className="p-4">
                     <h3 className="text-lg font-semibold mb-2">{item.name}</h3>
-                    <p className="text-gray-600 text-sm mb-2">
+                    <p className="text-gray-600 dark:text-gray-300 text-sm mb-2">
                       {item.restaurant}
                     </p>
                     <div className="flex justify-between items-center">
@@ -259,7 +258,7 @@ export function Home() {
 
         {/* Featured Restaurants Section */}
         <div className="max-w-7xl mx-auto px-4 py-8">
-          <h2 className="text-2xl font-bold mb-6">Featured Restaurants</h2>
+          <h2 className="text-2xl font-bold dark:text-white mb-6">Featured Restaurants</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {restaurants.map((restaurant) => (
               <div

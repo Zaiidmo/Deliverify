@@ -78,10 +78,10 @@ const NavBar = () => {
           <LogoutButton />
         ) : (
           <Link
-            className="inline-flex items-center justify-center rounded-md bg-transparent p-2 py-2 text-sm border border-black dark:border-yellow-500 dark:text-white shadow-sm transition-all duration-150 hover:bg-black hover:border-white hover:dark:border-white hover:text-white"
+            className="inline-flex items-center justify-center rounded-md bg-transparent p-2 py-2 text-sm  border-black dark:border-yellow-500 dark:text-white shadow-sm transition-all duration-150 hover:bg-black hover:border-white hover:dark:border-white hover:text-white"
             to="/Register"
           >
-            Get Started
+            
           </Link>
         )}
       </header>
