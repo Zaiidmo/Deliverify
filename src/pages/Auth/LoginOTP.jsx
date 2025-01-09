@@ -1,5 +1,5 @@
 import React from "react";
-import { LoginOTPForm } from "../../components/LoginOTPForm";
+import { LoginOTPForm } from "../../components/Auth/LoginOTPForm";
 const LoginOTP = () => {
   return (
     <>

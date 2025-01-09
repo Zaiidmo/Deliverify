@@ -6,11 +6,20 @@ import Register from "../pages/Auth/Register.jsx";
 import Login from "../pages/Auth/Login.jsx";
 import ForgotPassword from "../pages/Auth/ForgotPassword.jsx";
 import { Logout } from "../services/AuthService.js";
-import {ResetPasswordForm } from "../components/ResetPasswordForm.jsx";
+import { ResetPasswordForm } from "../components/Auth/ResetPasswordForm.jsx";
 import OTPLogin from "../pages/Auth/LoginOTP.jsx";
 import Layout from "../pages/Layout.jsx";
-import { EmailVerification } from "../components/EmailVerification.jsx";
+import { EmailVerification } from "../components/Auth/EmailVerification.jsx";
 import { PrivateRoute, PublicRoute } from "../components/RouteGuards.jsx";
+import UserProfile from "../pages/Delivery/UserProfile.jsx";
+import { Dashboard } from "../pages/Admin/Dashboard.jsx";
+import { Restaurants } from "../pages/Admin/Restaurants.jsx";
+import AdminLogsPage from "../pages/Admin/AdminLogsPage.jsx";
+import UserLogsPage from "../pages/UserLogsPage.jsx";
+import { Users } from "../pages/Admin/Users.jsx";
+import RestaurantItems from "../pages/RestaurantItems.jsx";
+import { Roles } from "../pages/Admin/Roles.jsx";
+import { ListClientOrders } from "../components/Dashboard/ListClientOrders.jsx";
 
 const AppRoutes = () => {
   return (
@@ -33,14 +42,37 @@ const AppRoutes = () => {
             </PublicRoute>
           }
         />
+        <Route path="/user/logs" element={<UserLogsPage />} />
+        <Route path="profile" element={<UserProfile />} />
+        <Route path="/restaurants-items/:id" element={<RestaurantItems />} />
+        <Route index element={<App />} />
+        {/* Private Routes */}
         <Route
-          index
+          path="/dashboard/*"
           element={
             <PrivateRoute>
-              <App />
+              <Routes>
+                <Route path="/" element={<Dashboard />} />
+                <Route path="restaurants" element={<Restaurants />} />
+                <Route path="users" element={<Users />} />
+                <Route path="roles" element={<Roles />} />
+                <Route path="logs" element={<AdminLogsPage />} />
+              </Routes>
             </PrivateRoute>
           }
         />
+
+        <Route
+          path="/seller/*"
+          element={
+            <PrivateRoute>
+              <Routes>
+                <Route path="/:id" element={<ListClientOrders />} />
+              </Routes>
+            </PrivateRoute>
+          }
+        />
+
         <Route
           path="logout"
           element={
@@ -49,9 +81,16 @@ const AppRoutes = () => {
             </PrivateRoute>
           }
         />
+        {/* <Route
+          path="user-profile"
+          element={
+            <PrivateRoute>
+              <UserProfile />
+            </PrivateRoute>
+          }
+        /> */}
       </Route>
     </Routes>
   );
 };
-
 export default AppRoutes;

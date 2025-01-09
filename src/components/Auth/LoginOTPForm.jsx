@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { verifyOTP } from "../services/AuthService";
+import { verifyOTP } from "../../services/AuthService";
 // import { toast, ToastContainer } from "react-toastify";
 import toast, { Toaster } from "react-hot-toast";
 import { GridLoader } from "react-spinners";
@@ -83,7 +83,6 @@ export const LoginOTPForm = () => {
 
   return (
     <>
-      <Toaster />
       {/* <ToastContainer position="top-right" autoClose={3000} /> */}
       <div className="relative h-screen flex justify-center items-center top-10">
         {/* Background with two shapes */}

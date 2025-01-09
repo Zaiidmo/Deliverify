@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { resetPassword } from "../services/AuthService";
+import { resetPassword } from "../../services/AuthService";
 import { KeyRound, Eye, EyeOff } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 import { GridLoader } from "react-spinners";
@@ -83,7 +83,6 @@ export const ResetPasswordForm = () => {
 
   return (
     <>
-      <Toaster />
       <div className="relative h-screen flex justify-center items-center top-10">
         {/* Background with two shapes */}
         <div className="hidden md:block absolute w-[700px] h-[520px] -translate-x-2/4 -translate-y-2/4 left-2/4 top-2/4">

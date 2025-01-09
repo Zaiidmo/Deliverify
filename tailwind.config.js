@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   darkMode: "class",
   content: [
     "./index.html",
@@ -8,7 +8,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily:{
-        'poppins': 'Poppins,'
+        'poppins': 'Poppins',
+        'macondo': 'Macondo',
       }
     },
   },

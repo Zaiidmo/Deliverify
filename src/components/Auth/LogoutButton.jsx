@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Logout } from "../services/AuthService";
+import { Logout } from "../../services/AuthService";
 import toast, { Toaster } from "react-hot-toast";
 
 const LogoutButton = () => {
@@ -23,7 +23,6 @@ const LogoutButton = () => {
 
   return (
     <>
-      <Toaster />
       <button
         onClick={handleLogout}
         className="size-[38px] inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-black hover:bg-violet-500 focus:outline-none focus:bg-violet-500 disabled:opacity-50 disabled:pointer-events-none dark:text-yellow-500 dark:hover:bg-white dark:focus:bg-neutral-200"

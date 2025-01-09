@@ -1,7 +1,7 @@
 // src/pages/Auth/EmailVerification.jsx
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { verifyEmail } from "../services/AuthService"; 
+import { verifyEmail } from "../../services/AuthService"; 
 
 export const EmailVerification = () => {
   const navigate = useNavigate();
