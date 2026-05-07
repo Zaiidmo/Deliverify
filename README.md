@@ -21,10 +21,12 @@ This project is structured as an **NPM Workspace Monorepo**, ensuring a shared d
 ## ⚡ Quick Start
 
 ### 1. Prerequisites
+
 - **Node.js** (v20+)
 - **MongoDB** (running instance)
 
 ### 2. Setup
+
 Clone the repository and install all dependencies for both apps at once:
 
 ```bash
@@ -34,17 +36,20 @@ npm install
 ```
 
 ### 3. Environment Config
+
 Configure both the frontend and backend environment variables:
 
 - **Backend:** Copy `backend/.env.example` to `backend/.env` and fill in your MongoDB URI and secrets.
 - **Frontend:** Create `frontend/.env` with your API base URL (default: `http://localhost:3000`).
 
 ### 4. Running the Project
+
 Launch both the Frontend and Backend concurrently with a single command:
 
 ```bash
 npm run dev
 ```
+
 - **Frontend:** http://localhost:5173
 - **Backend:** http://localhost:3000
 
@@ -54,13 +59,13 @@ npm run dev
 
 Run these from the **root directory**:
 
-| Command | Action |
-| :--- | :--- |
-| `npm install` | Installs dependencies for the entire project |
-| `npm run dev` | Runs Frontend and Backend concurrently |
-| `npm test` | Runs all test suites (including 130+ backend tests) |
-| `npm run lint` | Lints the entire codebase |
-| `npm run build` | Builds both frontend and backend for production |
+| Command         | Action                                              |
+| :-------------- | :-------------------------------------------------- |
+| `npm install`   | Installs dependencies for the entire project        |
+| `npm run dev`   | Runs Frontend and Backend concurrently              |
+| `npm test`      | Runs all test suites (including 130+ backend tests) |
+| `npm run lint`  | Lints the entire codebase                           |
+| `npm run build` | Builds both frontend and backend for production     |
 
 ---
 
