@@ -1,66 +1,22 @@
 # 🚀 Deliverify Frontend
 
-**Deliverify Frontend** is the React-based interface for the Deliverify ecosystem, delivering a responsive, intuitive experience for clients, couriers, and admins.
-
-<p align="left">
-  <img alt="React" src="https://img.shields.io/badge/React-18.x-blue">
-  <img alt="Vite" src="https://img.shields.io/badge/Vite-Build-purple">
-  <img alt="Axios" src="https://img.shields.io/badge/Axios-HTTP Client-lightblue">
-  <img alt="TailwindCSS" src="https://img.shields.io/badge/TailwindCSS-Frontend-teal">
-</p>
+**Deliverify Frontend** is the React interface for the Deliverify ecosystem, delivering a responsive experience for clients, couriers, and admins.
 
 ---
 
-## ⚙️ Installation
+## ⚙️ Getting Started
 
-```bash
-git clone https://github.com/Zaiidmo/Deliverify.git
-cd Deliverify
-npm install
-npm run dev
-```
+This package is part of the [Deliverify Monorepo](../README.md). For full installation instructions, please refer to the root README.
 
-App runs on **http://localhost:5173** by default.
+### Specific Scripts
+- `npm run dev`: Starts the Vite development server.
+- `npm run build`: Generates the production build.
+- `npm run lint`: Checks for code quality issues.
 
 ---
 
-## 🌍 Environment Variables
+## ✨ Key Modules
 
-Create `.env`:
-
-```env
-VITE_API_BASE_URL=http://localhost:3000
-VITE_ENV=development
-```
-
----
-
-## ✨ Features
-
-- 🔐 JWT Authentication (via Deliverify API)
-- 🧾 Admin dashboards for users and roles
-- 🛵 Delivery partner portal
-- 🧩 Client order management
-- 💬 Real-time updates
-- 📱 Fully responsive design with TailwindCSS
-
----
-
-## 🧠 Stack
-
-**Frontend:** React, Vite, TailwindCSS, Axios  
-**Backend:** [Deliverify API](https://github.com/Zaiidmo/Deliverify-API)
-
----
-
-## 🤝 Contributing
-
-Fork → Branch → Commit → PR  
-See [CONTRIBUTING.md](CONTRIBUTING.md).
-
----
-
-## 🪪 License
-
-MIT License — see [LICENSE](LICENSE).
-
+- **Auth:** JWT-based login, registration, and 2FA flows.
+- **Dashboards:** Specialized views for Admins (User/Role management), Sellers (Menu/Restaurant management), and Delivery Partners.
+- **Tracking:** Real-time order status and history.
