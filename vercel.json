@@ -1,4 +1,4 @@
 {
-  "buildCommand": "npm run build --workspaces --if-present",
-  "outputDirectory": "frontend/dist"
+  "buildCommand": "npm install && npm run build -w frontend && cp -r frontend/dist ./dist",
+  "outputDirectory": "dist"
 }
