@@ -4,7 +4,7 @@ import { apiClient } from "../helper/apiClient";
 // get user by id and token
 export const getUserByIdAndToken = async (id, token) => {
   try {
-    const response = await axios.get(`http://localhost:3000/api/users/${id}`, {
+    const response = await apiClient.get(`/users/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
